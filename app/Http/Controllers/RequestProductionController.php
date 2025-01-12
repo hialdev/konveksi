@@ -6,6 +6,7 @@ use App\Models\CustomOrder;
 use App\Models\Product;
 use App\Models\RawMaterial;
 use App\Models\RequestProduction;
+use App\Models\Stock;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -209,6 +210,12 @@ class RequestProductionController extends Controller
                 return redirect()->back()->with('error', 'Tidak ada proses selanjutnya.');
             }
             $production->save();
+
+            if(!$production->cek_pesanan_khusus){
+                $stock = Stock::where('produk_id', $production->produk_id)->first();
+                $stock->stok = $stock->stok + $production->qty;
+                $stock->save();
+            }
 
             return redirect()->route('request_production.index')->with('success', 'Berhasil '.($production->status == 0 ? 'Proses' : 'Selesaikan').' Permintaan Produksi dengan Kode '.$production->code.'.');
         } catch (\Exception $e) {

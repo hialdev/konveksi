@@ -407,33 +407,36 @@
                             @if($order->retur)
                             <tr>
                                 <td colspan="6">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <div class="bg-danger p-1 px-2 h-100 rounded-2 text-white fw-bold">
-                                            <i class="ti ti-truck-return"></i>
+                                    <div class="accordion-item p-3 border border-danger rounded-3 border-dashed">
+                                        <div class="accordion-button d-flex align-items-center justify-content-between gap-2" style="cursor: pointer">
+                                            <div class="bg-danger p-1 px-2 h-100 rounded-2 text-white fw-bold d-inline-block">
+                                                <i class="ti ti-truck-return"></i>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                Pengembalian <span class="fs-1 text-muted ms-4">Klik untuk melihat detail</span>
+                                            </div>
+                                            <div class="{{$order->retur->status == '0' ? '' : 'd-none'}} ms-auto p-1 px-2 bg-light-subtle fs-2 rounded-2">Menunggu Pengembalian</div>
+                                            <div class="{{$order->retur->status == '1' ? '' : 'd-none'}} ms-auto p-1 px-2 bg-danger text-white fs-2 rounded-2">Tidak Sah</div>
+                                            <div class="{{$order->retur->status == '2' ? '' : 'd-none'}} ms-auto p-1 px-2 bg-success text-white fs-2 rounded-2">Terselesaikan</div>
                                         </div>
-                                        <div>
-                                            @switch($order->status)
-                                                @case('1') 
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <div class="p-1 px-2 bg-success-subtle text-success fs-2 rounded-2">Selesai Pengembalian</div>
-                                                        <div class="fs-2">Pengembalian telah selesai, solusi refund atau tukar barang telah dilakukan di Toko</div>
-                                                    </div>
-                                                    @break
-                                                @case('2')
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <div class="p-1 px-2 bg-danger-subtle text-danger fs-2 rounded-2">Pengembalian Invalid</div>
-                                                        <div class="fs-2">Pengembalian ditolak, Pesanan telah sesuai permintaan, kesalahan terjadi pada pengiriman atau kesalahan pembeli</div>
-                                                    </div>
-                                                    @break
-                                                @default
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <div class="p-1 px-2 bg-light-subtle fs-2 rounded-2">Menunggu Pengembalian</div>
-                                                        <div class="fs-2">Kembalikan barang ke toko untuk di verifikasi pengembaliannya.</div>
-                                                    </div>
-                                                    
-                                            @endswitch
+                                        <div class="accordion-content row mt-2" style="display: none;">
+                                            <div class="col-md-6">
+                                                <div class="d-flex flex-column align-items-start gap-1 ">
+                                                    <div class="fs-2 text-muted">Tanggapan Pengembalian</div>
+                                                    <div class="fs-2 line-clamp line-clamp-2">{{$order->retur->keterangan_aksi ?? '-'}}</div>
+                                                    <a href="{{$order->retur->lampiran_aksi ? '/storage/'.$order->retur->lampiran_aksi : '#'}}" target="{{$order->retur->lampiran_aksi ? '_blank' : '_self'}}" class="btn btn-sm btn-light mt-2 fs-2 d-flex align-items-center gap-2">
+                                                        <i class="ti ti-file"></i>
+                                                        Lihat Bukti
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="d-flex align-items-end text-end flex-column gap-1">
+                                                    <div class="fs-2 text-muted">Alasan Pengembalian</div>
+                                                    <div class="fs-2 text-dark"><q>{{$order->retur->keterangan}}</q></div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <q class="d-block ms-auto fs-3 line-clamp line-clamp-3 text-italic">{{$order->retur->keterangan}}</q>
                                     </div>
                                 </td>
                             </tr>
@@ -478,5 +481,15 @@
             });
         });
     });
+</script>
+<script>
+$(document).ready(function() {
+    // Menangani klik pada setiap tombol accordion dalam loop
+    $('.accordion-button').click(function() {
+        // Cari konten yang terkait dengan tombol yang diklik
+        const content = $(this).closest('.accordion-item').find('.accordion-content');
+        content.slideToggle();
+    });
+});
 </script>
 @endsection

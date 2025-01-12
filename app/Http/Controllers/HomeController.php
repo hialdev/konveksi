@@ -21,6 +21,10 @@ class HomeController extends Controller
         $role = auth()->user() !== null ? auth()->user()->getRoleNames()[0] : '';
         
         $isAdmin = in_array($role, ['admin', 'developer']);
+        
+        if($isAdmin){
+            return view('dashboard.admin');
+        }
 
         return view('dashboard.index');
     }

@@ -486,8 +486,8 @@
                                             <div class="col-md-6">
                                                 <div class="d-flex flex-column align-items-start gap-1 ">
                                                     <div class="fs-2 text-muted">Tanggapan Pengembalian</div>
-                                                    <div class="fs-2 line-clamp line-clamp-2">{{$order->retur->keterangan_aksi ?? 'Telah diterima dan diputuskan sesuai syarat dan ketentuan pengembalian'}}</div>
-                                                    <a href="{{'/storage/'.$order->retur->lampiran_aksi}}" target="_blank" class="btn btn-sm btn-light mt-2 fs-2 d-flex align-items-center gap-2">
+                                                    <div class="fs-2 line-clamp line-clamp-2">{{$order->retur->keterangan_aksi ?? '-'}}</div>
+                                                    <a href="{{$order->retur->lampiran_aksi ? '/storage/'.$order->retur->lampiran_aksi : '#'}}" target="{{$order->retur->lampiran_aksi ? '_blank' : '_self'}}" class="btn btn-sm btn-light mt-2 fs-2 d-flex align-items-center gap-2">
                                                         <i class="ti ti-file"></i>
                                                         Lihat Bukti
                                                     </a>

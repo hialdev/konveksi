@@ -45,6 +45,40 @@ class Order extends Model
         return generateCode($type, $newNumber); // Fungsi generateCode dengan nilai default
     }
 
+    public static function getTopRevenueProducts($limit = 5)
+    {
+        $orders = self::where('status', 2)->get(); // Hanya pesanan valid
+        $productRevenues = [];
+
+        foreach ($orders as $order) {
+            $products = json_decode($order->produk, true); // Decode JSON produk
+            
+            foreach ($products as $productId => $productData) {
+                $qty = $productData['qty'];
+                $revenue = ($order->total_harga / array_sum(array_column($products, 'qty'))) * $qty;
+
+                if (!isset($productRevenues[$productId])) {
+                    $productRevenues[$productId] = [
+                        'id' => $productId,
+                        'qty' => $qty,
+                        'total_revenue' => $revenue,
+                    ];
+                } else {
+                    $productRevenues[$productId]['qty'] += $qty;
+                    $productRevenues[$productId]['total_revenue'] += $revenue;
+                }
+            }
+        }
+
+        usort($productRevenues, fn($a, $b) => $b['total_revenue'] <=> $a['total_revenue']);
+        return array_slice($productRevenues, 0, $limit);
+    }
+
+    public static function calculateRevenueByStatus($status)
+    {
+        return self::where('status', '>=', $status)->where('status', '!=', '3')->where('status', '!=', '5')->sum('total_harga');
+    }
+
     public function stock()
     {
         return $this->belongsTo(Stock::class, 'stok_id');

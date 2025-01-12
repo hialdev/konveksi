@@ -231,6 +231,9 @@
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#paymentModal">
           Tambah Pembayaran
         </button>
+        <button type="button" class="btn btn-primary-subtle btn-al-primary text-white" data-bs-toggle="modal" data-bs-target="#bankModal">
+          List Rekening
+        </button>
 
         <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -252,6 +255,38 @@
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Tambah Pembayaran</button>
                 </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="bankModal" tabindex="-1" aria-labelledby="bankModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="bankModalLabel">List Rekening</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body pt-0" style="white-space:normal !important">
+                @forelse ($banks as $bank)
+                  <div class="d-flex align-items-center gap-4 p-3 rounded-4 border border-primary">
+                    <img src="{{$bank->logo ? '/storage/'.$bank->logo : ''}}" alt="Bank {{$bank->nama_bank}} Logo" class="d-block rounded-3" style="aspect-ratio:3/2; object-fit:contain; height:5em;">
+                    <div>
+                      <div class="fs-4 fw-bold text-dark">{{$bank->nama_bank}}</div>
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="rekening-number" id="rekening-2">{{$bank->no_rekening}}</span>
+                        <button class="btn btn-sm p-1 px-1 btn-light" onclick="copyToClipboard('#rekening-2')">
+                          <i class="ti ti-copy"></i>
+                        </button>
+                      </div>
+                      <div>a.n {{$bank->nama_rekening}}</div>
+                    </div>
+                  </div> 
+                @empty
+                  <div class="p-4 rounded-3 text-center border border-danger border-dashed">
+                      Belum ada Rekening Bank, Konfirmasi Admin untuk Rekening Bank
+                  </div>
+                @endforelse
               </div>
             </div>
           </div>
@@ -430,6 +465,16 @@
 @section('scripts')
 <script>
 $(document).ready(function() {
+    window.copyToClipboard = function(element) {
+      var $temp = $("<input>");
+      $("body").append($temp);
+      $temp.val($(element).text()).select();
+      document.execCommand("copy");
+      $temp.remove();
+
+      alert('Rekening berhasil di copy');
+    }
+
     $('.accordion-content').hide();
     // Menangani klik pada setiap tombol accordion dalam loop
     $('.accordion-button').click(function() {
@@ -437,6 +482,7 @@ $(document).ready(function() {
         const content = $(this).closest('.accordion-item').find('.accordion-content');
         content.slideToggle();
     });
+    
 });
 </script>
 @endsection

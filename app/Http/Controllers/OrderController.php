@@ -167,6 +167,12 @@ class OrderController extends Controller
             if($order->status != '1'){
                 return redirect()->back()->withInput()->with('error', 'Gagal menyetujui pesanan, Status tidak valid');
             }
+            $products = json_decode($order->produk);
+            foreach($products as $key => $value){
+                $stock = Stock::where('produk_id', $key)->first();
+                $stock->stok = $stock->stok - $value->qty;
+                $stock->save();
+            }
             $order->status = '2';
             $order->save();
             return redirect()->back()->with('success', 'Menyetujui Pesanan dengan Kode Pesanan '.$order->code);

@@ -48,6 +48,11 @@ class CustomOrder extends Model
         return generateCode($type, $newNumber); // Fungsi generateCode dengan nilai default
     }
 
+    public static function calculateRevenue()
+    {
+        return self::where('status', '=', '5')->sum('total_harga');
+    }
+
     public function customer(){
         return $this->belongsTo(User::class, 'user_id');
     }

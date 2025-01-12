@@ -60,7 +60,7 @@
                         <span class="hide-menu">Pesanan Khusus Saya</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ Route::is('etalase') ? 'selected' : '' }}">
+                {{-- <li class="sidebar-item {{ Route::is('etalase') ? 'selected' : '' }}">
                     <a href="{{ route('home') }}" class="sidebar-link" aria-expanded="false">
                         <span>
                             <i class="ti ti-star"></i>
@@ -75,7 +75,7 @@
                         </span>
                         <span class="hide-menu">Pengembalian Saya</span>
                     </a>
-                </li>
+                </li> --}}
                 
                 @if(auth()->user() && auth()->user()->getRoleNames()[0] != 'pelanggan')
                     <li class="nav-small-cap mt-2">
@@ -247,7 +247,7 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                             <span class="d-flex">
-                                <i class="ti ti-checklist"></i>
+                                <i class="ti ti-shopping-cart"></i>
                             </span>
                             <span class="hide-menu">Pesanan</span>
                         </a>

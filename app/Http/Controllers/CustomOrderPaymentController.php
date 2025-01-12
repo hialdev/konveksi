@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bank;
 use App\Models\CustomOrder;
 use App\Models\CustomOrderPayment;
 use Illuminate\Http\Request;
@@ -11,7 +12,8 @@ class CustomOrderPaymentController extends Controller
 
     public function index($id){
         $custom = CustomOrder::find($id);
-        return view('custom_orders.payment.index', compact('custom'));
+        $banks = Bank::orderBy('nama_bank', 'asc')->get();
+        return view('custom_orders.payment.index', compact('custom', 'banks'));
     }
 
     public function store(Request $request, $id){
@@ -96,7 +98,7 @@ class CustomOrderPaymentController extends Controller
                 $custom->status = '5';
                 $custom->save();
             }
-            
+
             return redirect()->route('custom-order.payment.index', $id)->with('success', 'Pembayaran berhasil diverifikasi');
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->with('error', 'Gagal memverifikasi pembayaran, Error: '.$e->getMessage());

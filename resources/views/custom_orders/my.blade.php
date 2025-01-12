@@ -183,7 +183,7 @@
                                     <div class="{{$corder->production?->status == 2 ? '' : 'd-none'}} badge bg-success rounded-3 fw-semibold fs-2">Selesai Diproduksi</div>
                                 </td>
                                 <td>
-                                    @if($corder->status == '4')
+                                    @if((int) $corder->status >= 4)
                                         <div class="mb-2">
                                             <div class="fs-1">Total Harga</div>
                                             <div class="fs-3 fw-bold text-primary">{{formatRupiah($corder->total_harga)}}</div>

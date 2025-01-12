@@ -250,7 +250,9 @@
                       </div>
                     </div> 
                   @empty
-                      
+                    <div class="p-4 rounded-3 text-center border border-danger border-dashed">
+                        Belum ada Rekening Bank, Konfirmasi Admin untuk Rekening Bank
+                    </div>
                   @endforelse
                 </div>
               </div>
