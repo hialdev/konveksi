@@ -57,14 +57,15 @@ REPLACE INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 -- Dumping data for table al_konveksi.model_has_permissions: ~0 rows (approximately)
 
--- Dumping data for table al_konveksi.model_has_roles: ~6 rows (approximately)
+-- Dumping data for table al_konveksi.model_has_roles: ~7 rows (approximately)
 REPLACE INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 	(1, 'App\\Models\\User', 1),
 	(2, 'App\\Models\\User', 2),
 	(3, 'App\\Models\\User', 3),
 	(3, 'App\\Models\\User', 4),
 	(4, 'App\\Models\\User', 5),
-	(4, 'App\\Models\\User', 6);
+	(4, 'App\\Models\\User', 6),
+	(4, 'App\\Models\\User', 10);
 
 -- Dumping data for table al_konveksi.password_resets: ~0 rows (approximately)
 
@@ -73,14 +74,22 @@ REPLACE INTO `pelanggan` (`id`, `nama`, `email`, `user_id`, `created_at`, `updat
 	('2f0067f7-e048-4f3d-bc2a-753f3ceb23d0', 'customer1', 'customer1@gmail.com', 5, '2025-01-10 14:35:12', '2025-01-10 14:35:12'),
 	('433f49e4-29df-4f78-83e3-211c8c16a113', 'Mantap Jiwah', 'hallo@gmail.com', NULL, '2024-12-27 06:50:50', '2024-12-27 06:50:50'),
 	('5eff0ceb-482f-45f7-b219-a2c2735df2ef', 'Mba Limul', 'limul@hiamalif.com', 6, '2025-01-10 14:38:47', '2025-01-10 14:38:47'),
+	('66607b85-6bb4-4796-a102-c267741d1a40', 'Aselole', 'aselole@jklasd.com', 10, '2025-01-12 12:30:50', '2025-01-12 12:30:50'),
 	('aee0c9c2-31f8-4dd3-b9f6-1dc4a291d577', NULL, 'customer@gmail.com', NULL, '2024-12-27 06:20:42', '2024-12-27 06:20:42'),
 	('daef3c31-57e6-4454-aec7-80a52e2c8de1', NULL, 'wkwk@gmail.com', NULL, '2024-12-27 06:49:36', '2024-12-27 06:49:36');
 
--- Dumping data for table al_konveksi.pembayaran_pesanan_khusus: ~0 rows (approximately)
+-- Dumping data for table al_konveksi.pembayaran_pesanan_khusus: ~4 rows (approximately)
+REPLACE INTO `pembayaran_pesanan_khusus` (`id`, `pesanan_khusus_id`, `bukti_pembayaran`, `total_dibayar`, `status`, `created_at`, `updated_at`) VALUES
+	('26aaf949-724e-42d7-bd00-4fff914c547e', 'd787e3e9-993d-46fb-ab97-3f8388a1caa1', 'custom_orders/pay/Hb9fph1v7FXByJMLjZJ4HuNVgjdrlqR1dGQQd6oR.webp', 12500000, '2', '2025-01-12 11:31:46', '2025-01-12 11:36:48'),
+	('3e534f93-2298-4b3e-982d-4c17ec6ce522', 'd787e3e9-993d-46fb-ab97-3f8388a1caa1', 'custom_orders/pay/HEyX78OZhUegzrCdeegWPiH3Y7MaLFrzQbgq5SkF.webp', 312232, '2', '2025-01-12 09:10:23', '2025-01-12 11:16:51'),
+	('8a3952a2-70dc-4e98-859e-807965384161', 'd787e3e9-993d-46fb-ab97-3f8388a1caa1', 'custom_orders/pay/WRQ5PFsl0Pux8sYTmdIVudetVbFHrKUR4BuNUtBG.png', 42172322, '2', '2025-01-12 09:10:52', '2025-01-12 11:19:23'),
+	('c2088bdd-dc84-4c14-ac40-c5a55bee22cc', 'd787e3e9-993d-46fb-ab97-3f8388a1caa1', 'custom_orders/pay/Txdq4WzHE33FjtV7ImSss6hsGuJLb7eGxTruuHSM.webp', 15446, '2', '2025-01-12 11:32:25', '2025-01-12 11:53:52');
 
 -- Dumping data for table al_konveksi.pembelian_bahan_baku: ~0 rows (approximately)
 
--- Dumping data for table al_konveksi.pengajuan_produksi: ~0 rows (approximately)
+-- Dumping data for table al_konveksi.pengajuan_produksi: ~1 rows (approximately)
+REPLACE INTO `pengajuan_produksi` (`id`, `user_id`, `bahan_baku_id`, `produk_id`, `code`, `keterangan`, `qty`, `deadline`, `lampiran`, `status`, `cek_pesanan_khusus`, `pesanan_khusus_id`, `created_at`, `updated_at`) VALUES
+	('ca3860c4-a35d-49e6-8a53-c9019380825f', 2, 'b004bfa4-8a73-418c-ac66-bc3ae5b25496', 'f5ac43b3-3594-4c2b-9b6d-cfe81aeef823', 'REQP/001/BRC/I/25', 'Gamisno italiano', 42131, '2025-03-08', 'request_productions/JLYY3wfWthwqgY0yGrYakWIWL3XMu8D5ooqkcfsW.png', '0', 1, 'd787e3e9-993d-46fb-ab97-3f8388a1caa1', '2025-01-12 06:14:13', '2025-01-12 06:14:13');
 
 -- Dumping data for table al_konveksi.pengembalian: ~2 rows (approximately)
 REPLACE INTO `pengembalian` (`id`, `pesanan_id`, `user_id`, `pesanan_khusus_id`, `status`, `keterangan`, `lampiran_aksi`, `keterangan_aksi`, `aksi_timestamp`, `cek_pesanan_khusus`, `created_at`, `updated_at`) VALUES
@@ -93,18 +102,20 @@ REPLACE INTO `pengembalian` (`id`, `pesanan_id`, `user_id`, `pesanan_khusus_id`,
 
 -- Dumping data for table al_konveksi.pesanan: ~6 rows (approximately)
 REPLACE INTO `pesanan` (`id`, `user_id`, `code`, `status`, `produk`, `bukti_pembayaran`, `total_harga`, `created_at`, `updated_at`) VALUES
+	('09c0964b-d7af-42fe-a15a-425e3cc449c4', 6, 'ORDER/008/BRC/I/25', '2', '{"68f76269-038a-4cc0-8951-540bc7713818": {"id": "68f76269-038a-4cc0-8951-540bc7713818", "qty": 1}, "bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 2}, "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823": {"id": "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823", "qty": 1}}', 'orders/TarLcGpWGwZLW9phlWFu3M8Trp0JkxUO2i4TJ2VY.png', 132887, '2025-01-12 12:04:58', '2025-01-12 12:10:35'),
 	('09d8ca5d-2b66-425a-84cf-83355813c921', 1, 'ORDER/004/BRC/I/25', '4', '{"68f76269-038a-4cc0-8951-540bc7713818": {"id": "68f76269-038a-4cc0-8951-540bc7713818", "qty": 3}, "bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 2}, "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823": {"id": "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823", "qty": 1}}', 'orders/SDqtsoS8yoLsCkJ06x9iXobTZYFnEedcWdLMR3oC.png', 184218, '2025-01-10 14:39:02', '2025-01-10 15:08:53'),
 	('37260163-dc67-4ce8-8882-08c2f96a3e55', 5, 'ORDER/003/BRC/I/25', '3', '{"68f76269-038a-4cc0-8951-540bc7713818": {"id": "68f76269-038a-4cc0-8951-540bc7713818", "qty": 2}, "bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 1}, "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823": {"id": "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823", "qty": 2}}', 'orders/H4Sflj62vc185IXGAcsSPuBIMD5g24Dfw4HtGycl.png', 192108, '2025-01-10 14:37:31', '2025-01-10 15:09:18'),
 	('4604558e-671c-4419-b5c7-540c86162418', 5, 'ORDER/002/BRC/I/25', '4', '{"bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 1}, "f0b827eb-7db2-49a6-bdb8-f8703543f4b8": {"id": "f0b827eb-7db2-49a6-bdb8-f8703543f4b8", "qty": 1}}', 'orders/6DGshTlBUVvPL0RblSsCtDJ95lZ5C7mMeJ3l6ipm.webp', 133692, '2025-01-10 14:37:10', '2025-01-10 15:24:06'),
 	('bcc609ce-d114-4922-aebe-d49062376140', 6, 'ORDER/007/BRC/I/25', '4', '{"68f76269-038a-4cc0-8951-540bc7713818": {"id": "68f76269-038a-4cc0-8951-540bc7713818", "qty": 1}, "bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 1}, "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823": {"id": "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823", "qty": 1}}', 'orders/vq5i8e7tGyQmv77zsGL39Q0QEGoRp21OoFe9C4Bp.png', 108332, '2025-01-11 14:05:02', '2025-01-11 14:10:33'),
 	('cf65562f-b25c-4491-a5ca-69c97e310829', 5, 'ORDER/005/BRC/I/25', '4', '{"68f76269-038a-4cc0-8951-540bc7713818": {"id": "68f76269-038a-4cc0-8951-540bc7713818", "qty": 1}, "bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 1}}', 'orders/rJBSayqiIHi4Er1RQRLAL9nKT74rWgNM6gmERd7y.webp', 50221, '2025-01-10 14:40:23', '2025-01-11 13:11:23'),
-	('eb679215-4975-4705-a243-b804d34a75e5', 6, 'ORDER/006/BRC/I/25', '4', '{"bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 1}, "f0b827eb-7db2-49a6-bdb8-f8703543f4b8": {"id": "f0b827eb-7db2-49a6-bdb8-f8703543f4b8", "qty": 1}, "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823": {"id": "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823", "qty": 1}}', 'orders/PsaT9ma1v6CITiNmCOYj3t2VvHenvifhCQ2ydFaf.png', 191802, '2025-01-10 14:50:16', '2025-01-10 15:08:38');
+	('eb679215-4975-4705-a243-b804d34a75e5', 6, 'ORDER/006/BRC/I/25', '4', '{"bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 1}, "f0b827eb-7db2-49a6-bdb8-f8703543f4b8": {"id": "f0b827eb-7db2-49a6-bdb8-f8703543f4b8", "qty": 1}, "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823": {"id": "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823", "qty": 1}}', 'orders/PsaT9ma1v6CITiNmCOYj3t2VvHenvifhCQ2ydFaf.png', 191802, '2025-01-10 14:50:16', '2025-01-10 15:08:38'),
+	('f84b140c-af0d-4e6c-a36c-383b014d1a7f', 6, 'ORDER/009/BRC/I/25', '2', '{"68f76269-038a-4cc0-8951-540bc7713818": {"id": "68f76269-038a-4cc0-8951-540bc7713818", "qty": 1}, "bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 1}, "f0b827eb-7db2-49a6-bdb8-f8703543f4b8": {"id": "f0b827eb-7db2-49a6-bdb8-f8703543f4b8", "qty": 3}}', 'orders/igAP3IpaWcQVLK8RDRdLM1h7x0C0gnOuH5XnbrHS.png', 377630, '2025-01-12 12:13:49', '2025-01-12 12:16:25');
 
 -- Dumping data for table al_konveksi.pesanan_khusus: ~3 rows (approximately)
 REPLACE INTO `pesanan_khusus` (`id`, `code`, `user_id`, `bahan_baku_id`, `produk_id`, `cek_bahan_dari_pelanggan`, `lampiran_bahan`, `nama_bahan`, `keterangan_bahan`, `lampiran`, `keterangan`, `deadline`, `qty`, `total_harga`, `status`, `status_pembayaran`, `keterangan_konveksi`, `keterangan_pelanggan`, `created_at`, `updated_at`) VALUES
 	('9afe39ee-4b59-46ad-b386-6eb32b01f76f', 'CUSTOM/002/BRC/I/25', 6, 'b004bfa4-8a73-418c-ac66-bc3ae5b25496', 'f5ac43b3-3594-4c2b-9b6d-cfe81aeef823', 0, NULL, NULL, NULL, 'custom_orders/ZcmSt5aMSLThYUYN2qzGQsZdoIlJLTu38grFpA11.png', 'Naon atuh kudu ngajalasin', '2025-02-06', 2344, 891223222, '3', '0', 'All in, kecuali pengiriman', NULL, '2025-01-11 14:58:51', '2025-01-12 05:28:50'),
 	('cf85c1ff-7735-4e34-8b2e-e7880acdc8d5', 'CUSTOM/004/BRC/I/25', 6, NULL, 'f0b827eb-7db2-49a6-bdb8-f8703543f4b8', 1, 'custom_orders/raw/XpAm9G2r1g4a7QVMV3ycP5mM9sZOT84Nym4lZTsB.pdf', 'Cobba Baru Ah', 'Apayah yang neak', 'custom_orders/QSG3c600vL3WAJ9McqiewwqXyCFedQjaYIkuOWYw.pdf', 'Buat shintaeyong nih bos', '2025-02-20', 5213, 312312122, '4', '0', NULL, NULL, '2025-01-11 17:03:59', '2025-01-11 19:25:23'),
-	('d787e3e9-993d-46fb-ab97-3f8388a1caa1', 'CUSTOM/003/BRC/I/25', 6, NULL, 'f5ac43b3-3594-4c2b-9b6d-cfe81aeef823', 1, 'custom_orders/raw/WyyvIDxHTyBUCgnRoGf9YE1dytpOolZUedN7jsfh.png', 'Bahan Baku Nih', 'Bahan premium nih dair itali', 'custom_orders/HdDz3jww99VPgZu6Jp5gN0LsETHdFAKBtwVZTbOR.pdf', 'Gamisno italiano', '2025-03-08', 42131, 55000000, '4', '0', 'Ya, baik bisa namun diluar pengemasan', 'Saya ingin menjadikannya 55jt saja bagaimana', '2025-01-11 16:58:25', '2025-01-11 19:36:29');
+	('d787e3e9-993d-46fb-ab97-3f8388a1caa1', 'CUSTOM/003/BRC/I/25', 6, NULL, 'f5ac43b3-3594-4c2b-9b6d-cfe81aeef823', 1, 'custom_orders/raw/WyyvIDxHTyBUCgnRoGf9YE1dytpOolZUedN7jsfh.png', 'Bahan Baku Nih', 'Bahan premium nih dair itali', 'custom_orders/HdDz3jww99VPgZu6Jp5gN0LsETHdFAKBtwVZTbOR.pdf', 'Gamisno italiano', '2025-03-08', 42131, 55000000, '5', '0', 'Ya, baik bisa namun diluar pengemasan', 'Saya ingin menjadikannya 55jt saja bagaimana', '2025-01-11 16:58:25', '2025-01-12 11:53:52');
 
 -- Dumping data for table al_konveksi.produk: ~4 rows (approximately)
 REPLACE INTO `produk` (`id`, `produk_kategori_id`, `image`, `nama`, `slug`, `keterangan`, `harga`, `created_at`, `updated_at`) VALUES
@@ -169,14 +180,18 @@ REPLACE INTO `ulasan` (`id`, `pesanan_id`, `produk_id`, `user_id`, `pesanan_khus
 	('cba33860-92bc-47f8-8413-290bc16591bd', '09d8ca5d-2b66-425a-84cf-83355813c921', '68f76269-038a-4cc0-8951-540bc7713818', 1, NULL, 5, 'Sangat bagus saya suka sekali', NULL, '2025-01-10 19:24:26', '2025-01-10 19:24:26'),
 	('ef35b34a-e016-4947-adcf-b3fc38f32251', 'eb679215-4975-4705-a243-b804d34a75e5', 'f0b827eb-7db2-49a6-bdb8-f8703543f4b8', 6, NULL, 4, 'Bagus semuanya, puas', NULL, '2025-01-11 02:55:17', '2025-01-11 02:55:17');
 
--- Dumping data for table al_konveksi.users: ~6 rows (approximately)
+-- Dumping data for table al_konveksi.users: ~10 rows (approximately)
 REPLACE INTO `users` (`id`, `image`, `name`, `email`, `phone`, `position`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(1, NULL, 'AL Developer', 'al@hiamalif.com', NULL, NULL, NULL, '$2y$10$GTn.6HirjG02FJHDjlyU2uTbucjfC7bbI8PT0s9oYPExnIltBLD62', NULL, '2025-01-10 14:30:30', '2025-01-10 14:30:30'),
 	(2, NULL, 'Admin User', 'admin@example.com', NULL, NULL, NULL, '$2y$10$v8eATzUkoRFIQuBOp4RUiuIiIxExPupeq.U33pyIfKk5/GJmGYKVa', NULL, '2025-01-10 14:30:30', '2025-01-10 14:30:30'),
 	(3, NULL, 'Employee User 1', 'employee1@example.com', NULL, NULL, NULL, '$2y$10$rk.V8x9vV0WOolfW7enwtexm7ahr9qVChcMZkHBxNRHT44BILU5jG', NULL, '2025-01-10 14:30:30', '2025-01-10 14:30:30'),
 	(4, NULL, 'Employee User 2', 'employee2@example.com', NULL, NULL, NULL, '$2y$10$HeeYURV9jiKBztqtbqP/WOz1ft.fAk1ZpaFClIBz4SPbb/Ja7ULLq', NULL, '2025-01-10 14:30:30', '2025-01-10 14:30:30'),
 	(5, NULL, 'customer1', 'customer1@gmail.com', NULL, NULL, NULL, '$2y$10$3LE6gg61qPk.rCWdm6BmveOc5FA.VPs6ef5zBkyBEqq056qKpVzkG', NULL, '2025-01-10 14:35:12', '2025-01-10 14:35:12'),
-	(6, NULL, 'Mba Limul', 'limul@hiamalif.com', NULL, NULL, NULL, '$2y$10$QEAKk9lB8I4XVdzEBqRpVua50xu8NsDiS342rSEuDK3TnlTL.wmvS', NULL, '2025-01-10 14:38:47', '2025-01-10 14:38:47');
+	(6, NULL, 'Mba Limul', 'limul@hiamalif.com', NULL, NULL, NULL, '$2y$10$QEAKk9lB8I4XVdzEBqRpVua50xu8NsDiS342rSEuDK3TnlTL.wmvS', NULL, '2025-01-10 14:38:47', '2025-01-10 14:38:47'),
+	(7, NULL, 'Abdul', 'abdul@gmail.com', NULL, NULL, NULL, '$2y$10$Uhnijzj1WTMP.IosVjvsbeTMQkxCyO55BB6j5u7Kld7pIPC/vUvFG', NULL, '2025-01-12 12:19:10', '2025-01-12 12:19:10'),
+	(8, NULL, 'mnuralif63', 'mnuralif63@gmail.com', NULL, NULL, NULL, '$2y$10$uWk8EjrEzwgjx3PCuILikukOKFQN6ECUvh7xIXd135xCaSO3pST/2', NULL, '2025-01-12 12:20:46', '2025-01-12 12:20:46'),
+	(9, NULL, 'Satriyo Manjalito', 'satriyo@gmail.com', NULL, NULL, NULL, '$2y$10$xwvAYDVJUbJSsMeSdP3Zv.JwLrAIFfVEZphdWXDS484W5kFyvcLRu', NULL, '2025-01-12 12:25:50', '2025-01-12 12:25:50'),
+	(10, NULL, 'Aselole', 'aselole@jklasd.com', NULL, NULL, NULL, '$2y$10$n8fExb.q6H4w.qjs8MOFGe4wCJZ68EOgvBI9J5e8/7N5/2WDuXqyi', NULL, '2025-01-12 12:30:50', '2025-01-12 12:30:50');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
