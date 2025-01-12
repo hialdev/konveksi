@@ -8,7 +8,7 @@
                 <div class="card mb-0 rounded-4">
                     <div class="card-body">
                         <a href="#" class="text-nowrap logo-img text-center d-block w-100">
-                            <img src="/assets/images/logos/tanurlogo.png" class="" alt="Tanur Muthmainnah" style="height:6rem" />
+                            <img src="/storage/{{setting('site.logo')}}" class="" alt="Logo App" style="height:6rem" />
                         </a>
                         {{-- <div class="position-relative text-center my-4">
                             <p class="mb-0 fs-4 px-3 d-inline-block bg-body text-dark z-index-5 position-relative">sign in with</p>
@@ -38,14 +38,15 @@
                                 <div class="form-check">
                                     <input class="form-check-input primary" type="checkbox" value="" name="remember" id="remember" checked>
                                     <label class="form-check-label text-dark" for="remember">
-                                        Remember this Device
+                                        Simpan sesi login
                                     </label>
                                 </div>
                                 @if (Route::has('password.request'))
-                                    <a class="text-primary fw-medium" href="{{ route('password.request') }}">Forgot Password ?</a>
+                                    <a class="text-primary fw-medium" href="{{ route('password.request') }}">Lupa Password ?</a>
                                 @endif
                             </div>
-                            <button class="btn btn-primary btn-al-primary w-100 py-8 mb-4 rounded-2">Sign In</button>
+                            <button class="btn btn-primary w-100 py-8 mb-2 rounded-2">Masuk</button>
+                            <a href="{{route('register')}}" class="btn bg-primary-subtle w-100 py-8 mb-3 rounded-2">Daftar</a>
                         </form>
                     </div>
                 </div>

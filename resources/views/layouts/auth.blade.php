@@ -15,11 +15,12 @@
   <link
     rel="shortcut icon"
     type="image/png"
-    href="/assets/images/logos/favicon.png"
+    href="/storage/{{setting('site.logo')}}"
   />
   <!-- Core Css -->
   <link rel="stylesheet" href="/assets/css/styles.css" />
   <link rel="stylesheet" href="/css/app.css" />
+  <link rel="stylesheet" href="{{url('/app.css')}}" />
 
 </head>
 
@@ -46,7 +47,7 @@
   </div>
   <!-- Preloader -->
   <div class="preloader">
-    <img src="/assets/images/logos/favicon.png" alt="loader" class="lds-ripple img-fluid" />
+    <img src="/storage/{{setting('site.logo')}}" alt="loader" class="lds-ripple img-fluid" />
   </div>
   <div id="main-wrapper">
     @yield('content')

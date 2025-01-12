@@ -6,11 +6,11 @@
                 <div class="card-body py-3">
                     <div class="row justify-content-between align-items-center">
                         <div class="col-sm-6">
-                            <h5 class="fw-semibold mb-9 fs-5">Ahlan Wasahlan.. {{auth()->user()->name}}!</h5>
+                            <h5 class="fw-semibold mb-9 fs-5">{{setting('site.dashboard-greeting')}}.. {{auth()->user()->name}}!</h5>
                             <p class="mb-9">
-                                Jangan lupa awali dengan bismillah, dan bersyukur atas hari yang berlalu
+                                {{setting('site.dashboard-paragraf')}}
                             </p>
-                            <a href="{{route('flyer.index')}}" class="btn btn-primary">Flyer Ku</a>
+                            <a href="{{url(setting('site.dashboard-button-link'))}}" class="btn btn-primary">{{setting('site.dashboard-button-text')}}</a>
                         </div>
                         <div class="col-sm-5">
                             <div class="position-relative mb-n7 text-end">
@@ -22,15 +22,15 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card border-start border-success al-primary">
+            <div class="card border-start border-al-primary al-primary">
                 <div class="card-body">
                     <div class="d-flex gap-4 no-block align-items-center">
                         <div>
-                            <span class="text-dark al-primary display-6"><i class="ti ti-users"></i></span>
+                            <span class="text-dark al-primary display-6"><i class="ti ti-basket"></i></span>
                         </div>
                         <div class="me-auto">
                             <h2 class="fs-7">{{$count->user}}</h2>
-                            <h6 class="fw-medium text-dark al-primary mb-0">Users</h6>
+                            <h6 class="fw-medium text-dark al-primary mb-0">Products</h6>
                         </div>
                     </div>
                 </div>
@@ -41,26 +41,26 @@
                 <div class="card-body">
                     <div class="d-flex gap-4 no-block align-items-center">
                         <div>
-                            <span class="text-primary display-6"><i class="ti ti-photo"></i></span>
+                            <span class="text-primary display-6"><i class="ti ti-checklist"></i></span>
                         </div>
                         <div class="me-auto">
                             <h2 class="fs-7">{{$count->flyer}}</h2>
-                            <h6 class="fw-medium text-primary mb-0">Flyers</h6>
+                            <h6 class="fw-medium text-primary mb-0">Orders</h6>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card border-start border-danger">
+            <div class="card border-start border-primary">
                 <div class="card-body">
                     <div class="d-flex gap-4 no-block align-items-center">
                         <div>
-                            <span class="text-danger display-6"><i class="ti ti-eye"></i></span>
+                            <span class="text-primary display-6"><i class="ti ti-wand"></i></span>
                         </div>
                         <div class="me-auto">
                             <h2 class="fs-7">{{$count->views}}</h2>
-                            <h6 class="fw-medium text-danger mb-0">Total Flyer Views</h6>
+                            <h6 class="fw-medium text-primary mb-0">Custom Orders</h6>
                         </div>
                     </div>
                 </div>
@@ -70,14 +70,14 @@
             <div class="card w-100 position-relative overflow-hidden">
                 <div class="card-body pb-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h5 class="card-title mb-0 fw-semibold"> Today Flyer Views </h5>
+                        <h5 class="card-title mb-0 fw-semibold"> Penjualan Hari Ini </h5>
                         <div class="p-2 bg-primary-subtle rounded-2 d-inline-block">
                             <img src="/assets/images/svgs/icon-master-card-2.svg" alt="" class="img-fluid"
                                 width="24" height="24">
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-7 pb-8">
-                        <h4 class="fw-semibold mb-0 fs-7 me-3">{{ $todayViewsCount }}</h4>
+                        <h4 class="fw-semibold mb-0 fs-7 me-3">Rp. {{ $todayViewsCount }}</h4>
                         <div class="d-flex align-items-center">
                             <span
                                 class="me-1 rounded-circle {{ $isGrowth ? 'bg-success-subtle' : 'bg-danger-subtle' }} round-20 d-flex align-items-center justify-content-center">

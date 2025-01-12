@@ -19,7 +19,7 @@
 
             <div class="d-block ms-auto d-lg-none" style="width: fit-content">
                 <a href="{{ route('home') }}" class="text-nowrap logo-img">
-                    <img src="/assets/images/logos/tanurlogo.png" class="" alt="Tanur Logo" style="height: 3em" />
+                    <img src="/storage/{{setting('site.logo')}}" class="" alt="{{env('APP_NAME')}} Logo" style="height: 3em" />
                 </a>
             </div>
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
@@ -31,9 +31,9 @@
                         aria-expanded="false">
                         <div class="d-flex align-items-center">
                             <div class="user-profile-img">
-                                <img src="{{ auth()->user()->image ? '/storage/'. auth()->user()->image : '/assets/images/profile/user-1.jpg' }}"
+                                <img src="{{ auth()->user() && auth()->user()->image ? '/storage/'. auth()->user()->image : '/assets/images/profile/user-1.jpg' }}"
                                     class="rounded-circle" width="35" height="35" style="object-fit: cover"
-                                    alt="Image User of {{ auth()->user()->name }}" />
+                                    alt="Image User of {{ auth()->user() ? auth()->user()->name : 'Pengujung Lagi' }}" />
                             </div>
                         </div>
                     </a>
@@ -44,15 +44,17 @@
                                 <h5 class="mb-0 fs-5 fw-semibold">User Profile</h5>
                             </div>
                             <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                                <img src="{{ auth()->user()->image ? '/storage/'. auth()->user()->image : '/assets/images/profile/user-1.jpg' }}"
+                                <img src="{{ auth()->user() && auth()->user()->image ? '/storage/'. auth()->user()->image : '/assets/images/profile/user-1.jpg' }}"
                                     class="rounded-circle" width="80" height="80" style="object-fit: cover"
-                                    alt="Again Image User of {{ auth()->user()->name }}" />
+                                    alt="Again Image User of {{ auth()->user() ? auth()->user()->name : 'Pengunjung'}}" />
                                 <div class="ms-3">
-                                    <h5 class="mb-1 fs-3">{{ auth()->user()->name }}</h5>
-                                    <span class="mb-1 d-block">{{ auth()->user()->getRoleNames()[0] }}</span>
+                                    <h5 class="mb-1 fs-3">{{ auth()->user() ? auth()->user()->name : 'Pengunjung' }}</h5>
+                                    <span class="mb-1 d-block">{{ auth()->user() ? auth()->user()->getRoleNames()[0] : 'Masuk Dahulu' }}</span>
+                                    @if(auth()->user())
                                     <p class="mb-0 d-flex align-items-center gap-2">
-                                        <i class="ti ti-mail fs-4"></i> {{ auth()->user()->email }}
+                                        <i class="ti ti-mail fs-4"></i> {{ auth()->user()->email}}
                                     </p>
+                                    @endif
                                 </div>
                             </div>
                             <div class="message-body">
@@ -63,16 +65,20 @@
                                             height="24" />
                                     </span>
                                     <div class="w-75 d-inline-block v-middle ps-3">
-                                        <h6 class="mb-1 fs-3 fw-semibold lh-base">My Profile</h6>
-                                        <span class="fs-2 d-block text-body-secondary">Account Settings</span>
+                                        <h6 class="mb-1 fs-3 fw-semibold lh-base">Profil</h6>
+                                        <span class="fs-2 d-block text-body-secondary">Mengatur Data Profile / Akun</span>
                                     </div>
                                 </a>
                             </div>
                             <div class="d-grid py-4 px-7 pt-8">
+                                @if(auth()->user())
                                 <form action="{{ route('logout') }}" method="POST" class="w-100">
                                     @csrf
-                                    <button type="submit" class="btn btn-outline-danger w-100">Log Out</button>
+                                    <button type="submit" class="btn btn-outline-danger w-100">Keluar</button>
                                 </form>
+                                @else
+                                <a href="{{route('login')}}" class="btn btn-primary w-100">Masuk</a>
+                                @endif
                             </div>
                         </div>
 

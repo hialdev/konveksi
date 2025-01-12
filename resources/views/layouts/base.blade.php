@@ -13,20 +13,23 @@
     <title>{{ config('app.name', 'Tanur Muthmainnah') }}</title>
 
     <!-- Favicon icon-->
-    <link rel="shortcut icon" type="image/png" href="/assets/images/logos/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="/storage/{{setting('site.logo')}}" />
 
     <!-- Owl Carousel  -->
     <link rel="stylesheet" href="/assets/libs/owl.carousel/dist/assets/owl.carousel.min.css" />
     <!-- Core Css -->
     <link rel="stylesheet" href="/assets/css/styles.css" />
     <link rel="stylesheet" href="/css/app.css" />
+    <link rel="stylesheet" href="{{url('/app.css')}}" />
+    
     @yield('css')
+
 </head>
 
 <body>
     <!-- Preloader -->
     <div class="preloader">
-        <img src="/assets/images/logos/favicon.png" alt="loader" class="lds-ripple img-fluid" />
+        <img src="/storage/{{setting('site.logo')}}" alt="loader" class="lds-ripple img-fluid" />
     </div>
     <div id="main-wrapper">
         @include('partials.sidebar')
@@ -239,7 +242,7 @@
         </script>
     @endif
 
-    @if (session('error'))
+    @if (session('error') || $errors->any())
         <div class="modal fade" id="al-danger-alert" tabindex="-1" aria-labelledby="vertical-center-modal"
             aria-hidden="true">
             <div class="modal-dialog modal-sm">
@@ -248,7 +251,7 @@
                         <div class="text-center text-danger">
                             <i class="ti ti-hexagon-letter-x fs-7"></i>
                             <h4 class="mt-2">Oh snap!</h4>
-                            <p class="mt-3">{{ session('error') }}</p>
+                            <p class="mt-3">{{ session('error') ?? $errors }}</p>
                             <button type="button" class="btn btn-light my-2"
                                 data-bs-dismiss="modal">Continue</button>
                         </div>
@@ -278,6 +281,36 @@
     <script src="/assets/libs/owl.carousel/dist/owl.carousel.min.js"></script>
     <script src="/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
 
+    <script>
+    const formatRupiah = (angka, prefix = "Rp") => {
+        const numberString = angka.toString().replace(/[^,\d]/g, "");
+        const split = numberString.split(",");
+        const sisa = split[0].length % 3;
+        let rupiah = split[0].substr(0, sisa);
+        const ribuan = split[0].substr(sisa).match(/\d{3}/g);
+
+        if (ribuan) {
+            const separator = sisa ? "." : "";
+            rupiah += separator + ribuan.join(".");
+        }
+
+        rupiah = split[1] !== undefined ? rupiah + "," + split[1] : rupiah;
+        return prefix + " " + rupiah;
+    }
+
+    const makeSlug = (text) => {
+        const slug = text
+            .toLowerCase()
+            .replace(/[^a-z0-9\s-]/g, '') // Hapus karakter khusus
+            .replace(/\s+/g, '-')         // Ganti spasi dengan tanda hubung
+            .replace(/-+/g, '-');         // Hapus tanda hubung berlebih
+        return slug;
+    };
+
+    $('.input-rupiah').on('input', function(){
+        $(this).val(formatRupiah($(this).val()));    
+    })
+    </script>
     @yield('scripts')
 </body>
 

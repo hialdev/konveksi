@@ -37,7 +37,7 @@
                         <h6 class="fs-4 fw-semibold mb-0">User</h6>
                     </th>
                     <th>
-                        <h6 class="fs-4 fw-semibold mb-0">Flyer</h6>
+                        <h6 class="fs-4 fw-semibold mb-0">Contact</h6>
                     </th>
                     <th>
                         <h6 class="fs-4 fw-semibold mb-0">Role</h6>
@@ -54,15 +54,21 @@
                                 height="40" />
                             <div class="ms-3">
                                 <h6 class="fs-4 fw-semibold mb-0">{{$user->name}}</h6>
-                                <span class="fw-normal">{{$user->email}}</span>
+                                <span class="fw-normal">{{$user->position}}</span>
                             </div>
                         </div>
                     </td>
                     <td>
-                        <span
-                            class="badge bg-success-subtle text-success fw-semibold fs-2 gap-1 d-inline-flex align-items-center">
-                            {{$user->flyersCount()}} Flyer
-                        </span>
+                        <div class="d-flex align-items-start flex-column">
+                            <div
+                                class="badge bg-primary-subtle text-primary mb-1 fw-semibold fs-2 gap-1 d-inline-flex align-items-center">
+                                <i class="ti ti-mail fs-4"></i>{{$user->email}}
+                            </div>
+                            <div
+                                class="badge {{ $user->phone ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger'}} fw-semibold fs-2 gap-1 d-inline-flex align-items-center">
+                                <i class="ti ti-phone fs-4"></i>{{$user->phone ?? 'Phone / Whatsapp belum ditentukan'}}
+                            </div>
+                        </div>
                     </td>
                     <td>
                         <div class="d-flex align-items-center gap-2">

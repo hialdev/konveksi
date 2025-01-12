@@ -80,6 +80,9 @@ class FlyerController extends Controller
         ]);
         try {
             $flyer = Flyer::findOrFail($id);
+            if($flyer->md->id != auth()->user()->id) {
+                return redirect()->route('home')->with('error', 'JANGAN MELAKUKAN HAL BURUK, INI BUKAN FLYER ANDA!! SISTEM MENCATAT KELAKUAN ANDA');
+            }
 
             if ($request->hasFile('image')) {
                 if ($flyer->image && file_exists(storage_path('app/public/' . $flyer->image))) {
@@ -125,6 +128,9 @@ class FlyerController extends Controller
     public function destroy($id){
         try {
             $flyer = Flyer::findOrFail($id);
+            if($flyer->md->id != auth()->user()->id) {
+                return redirect()->route('home')->with('error', 'JANGAN MELAKUKAN HAL BURUK, INI BUKAN FLYER ANDA!! SISTEM MENCATAT KELAKUAN ANDA');
+            }
             $flyer->delete();
             
             return redirect()->back()->with('success', 'Flyer Berhasil dihapus');

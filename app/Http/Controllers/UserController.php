@@ -14,7 +14,7 @@ class UserController extends Controller
         if($user->getRoleNames()[0] == 'developer'){
             $users = User::where('id', '!=', $user->id)->get();
         }else if($user->getRoleNames()[0] == 'admin'){
-            $users = User::role(['admin','marketing'])->get();
+            $users = User::role(['admin','employee'])->get();
         }else{
             return redirect()->route('home')->with('error', 'Anda dialihkan karena tidak ada akses ke halaman sebelumnya.');
         }
@@ -29,10 +29,12 @@ class UserController extends Controller
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:10240',
             'name' => 'required|string|max:255',
+            'position' => 'nullable|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
+            'phone' => 'nullable|numeric|digits_between:6,15',
             'password' => 'required|string|min:8',
             'confirm_password' => 'required|string|same:password|min:8',
-            'role' => 'required|string|in:admin,developer,marketing',
+            'role' => 'required|string|in:admin,developer,employee',
         ]);
         try {
             if ($request->hasFile('image')) {
@@ -72,7 +74,9 @@ class UserController extends Controller
         $request->validate([
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:10240',
             'name' => 'required|string|max:255',
+            'position' => 'nullable|string|max:255',
             'email' => 'required|string|email|max:255',
+            'phone' => 'nullable|numeric|digits_between:6,15',
             'password' => 'nullable|string|min:8',
             'confirm_password' => 'nullable|string|same:password|min:8',
         ]);
@@ -93,8 +97,11 @@ class UserController extends Controller
             }
             
             $user->image = $imagePath ?? $user->image;
+            $user->position = $request->get('position');
             $user->name = $request->get('name');
+            $user->position = $request->get('position');
             $user->email = $request->get('email');
+            $user->phone = $request->get('phone');
             $user->password = $request->get('password') ? Hash::make($request->get('password')) : $user->password;
             $user->save();
 
@@ -117,6 +124,7 @@ class UserController extends Controller
     public function destroy($id){
         try {
             $user = User::find($id);
+            
             $user->delete();
 
             return redirect()->route('user.index')->with('success', 'User berhasil dihapus');

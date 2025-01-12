@@ -21,7 +21,9 @@ class User extends Authenticatable implements MustVerifyEmail
             if ($model->image) {
                 Storage::disk('public')->delete($model->image);
             }
-            $model->flyers()->delete();
+            if($model->orders->count() <= 0 || $model->customOrders->count() <= 0) {
+                $model->user->delete();
+            }
         });
     }
 
@@ -56,11 +58,11 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
 
-    public function flyers(){
-        return $this->hasMany(Flyer::class, 'user_id', 'id');
+    public function orders(){
+        return $this->hasMany(Order::class, 'user_id');
     }
 
-    public function flyersCount(){
-        return $this->flyers->count();
+    public function customOrders() {
+        return $this->hasMany(CustomOrder::class, 'user_id');
     }
 }

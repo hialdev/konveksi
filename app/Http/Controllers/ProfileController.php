@@ -10,11 +10,7 @@ class ProfileController extends Controller
 {
     public function index(){
         $user = auth()->user();
-        $user = User::where('id',$user->id)->with(['flyers.views'])->first();
-        $totalViews = $user->flyers->sum(function ($flyer) {
-            return $flyer->views->count();
-        });
-        return view('profile.index', compact('user', 'totalViews'));
+        return view('profile.index', compact('user'));
     }
 
     public function edit(){

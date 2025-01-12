@@ -20,7 +20,8 @@ class URPSeeder extends Seeder
         $roles = [
             'developer',
             'admin',
-            'marketing',
+            'employee',
+            'pelanggan',
         ];
 
         foreach ($roles as $role) {
@@ -43,23 +44,23 @@ class URPSeeder extends Seeder
         ]);
         $admin->assignRole('admin');
 
-        // 4. Buat User Marketing
-        $marketingUsers = [
+        // 4. Buat User employee
+        $employeeUsers = [
             [
-                'name' => 'Marketing User 1',
-                'email' => 'marketing1@example.com',
+                'name' => 'Employee User 1',
+                'email' => 'employee1@example.com',
                 'password' => bcrypt('password123'),
             ],
             [
-                'name' => 'Marketing User 2',
-                'email' => 'marketing2@example.com',
+                'name' => 'Employee User 2',
+                'email' => 'employee2@example.com',
                 'password' => bcrypt('password123'),
             ],
         ];
 
-        foreach ($marketingUsers as $marketingUser) {
-            $user = User::create($marketingUser);
-            $user->assignRole('marketing');
+        foreach ($employeeUsers as $employeeUser) {
+            $user = User::create($employeeUser);
+            $user->assignRole('employee');
         }
 
         $this->command->info('Users and roles created successfully.');

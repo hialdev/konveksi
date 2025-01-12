@@ -30,17 +30,17 @@
                 <div class="col-lg-4 order-lg-1 order-2">
                     <div class="d-flex align-items-center justify-content-around m-4">
                         <div class="d-flex align-items-center gap-3">
-                            <i class="ti ti-photo d-block mb-2" style="font-size: 2rem"></i>
+                            <i class="ti ti-shopping-cart d-block mb-2" style="font-size: 2rem"></i>
                             <div>
-                                <h4 class="mb-0 fw-semibold lh-1">{{ $user->flyersCount() }}</h4>
-                                <p class="mb-0 fs-4">Flyers</p>
+                                <h4 class="mb-0 fw-semibold lh-1">{{ $user->orders->count() }}</h4>
+                                <p class="mb-0 fs-4">Pesanan</p>
                             </div>
                         </div>
                         <div class="d-flex align-items-center gap-3">
-                            <i class="ti ti-eye d-block mb-2" style="font-size: 2rem"></i>
+                            <i class="ti ti-checklist d-block mb-2" style="font-size: 2rem"></i>
                             <div>
-                                <h4 class="mb-0 fw-semibold lh-1">{{ $totalViews }}</h4>
-                                <p class="mb-0 fs-4">Views</p>
+                                <h4 class="mb-0 fw-semibold lh-1">{{ $user->customOrders->count() }}</h4>
+                                <p class="mb-0 fs-4">Pesanan Khusus</p>
                             </div>
                         </div>
                     </div>
@@ -71,40 +71,5 @@
             </div>
         </div>
     </div>
-    <div class=""
-        style="
-          display: grid;
-          gap: 1rem;
-          grid-template-columns: repeat(3, 1fr);"
-        >
-        @forelse ($user->flyers as $flyer)
-        <div class="card overflow-hidden mb-2">
-            <div class="el-card-item pb-3">
-                <div
-                    class="
-                  el-card-avatar
-                  mb-3
-                  el-overlay-1
-                  w-100
-                  overflow-hidden
-                  position-relative
-                  text-center
-                ">
-                    <a class="image-popup-vertical-fit" href="{{route('flyer.status', $flyer->id)}}">
-                        <img src="{{ $flyer->image ? '/storage/'.$flyer->image :'/assets/images/blog/blog-img5.jpg'}}" class="d-block position-relative w-100"
-                            alt="user" />
-                    </a>
-                </div>
-                <div class="el-card-content text-center">
-                    <h4 class="mb-0 fs-4">{{$flyer->title}}</h4>
-                    <div class="my-2 text-muted justify-content-center d-flex align-items-center gap-2"><i class="ti ti-eye" style="font-size: 1rem"></i> {{$flyer->viewsCount()}}</div>
-                </div>
-            </div>
-        </div>
-        @empty
-        <div class="d-flex align-items-center justify-content-center p-4 rounded-4 border-2 border-dashed w-100" style="height: 40vh; grid-column: span 3;">
-            <div class="text-center">Tidak ada Flyers</div>
-        </div>
-        @endforelse
-    </div>
+    
 @endsection

@@ -79,6 +79,22 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-4">
+                                    <label class="form-label fw-semibold">Jabatan</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text px-6" id="basic-addon1"><i
+                                                class="ti ti-user-exclamation fs-6"></i></span>
+                                        <input type="text" name="position" class="form-control ps-2"
+                                            placeholder="Jabatan" value="{{old('position', $user->position)}}">
+                                    </div>
+                                    @error('position')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-4">
                                     <label class="form-label fw-semibold">Email</label>
                                     <div class="input-group">
                                         <span class="input-group-text px-6" id="basic-addon1"><i
@@ -87,6 +103,22 @@
                                             placeholder="user@mail.com" value="{{old('email', $user->email)}}">
                                     </div>
                                     @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-semibold">Phone / Whatsapp</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text px-6" id="basic-addon1"><i
+                                                class="ti ti-phone fs-6"></i></span>
+                                        <input type="number" name="phone" class="form-control ps-2"
+                                            placeholder="No. Phone / Whatsapp" value="{{old('phone', $user->phone)}}">
+                                    </div>
+                                    @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             {{ $message }}
                                         </span>
@@ -133,11 +165,12 @@
                                         <label class="form-label fw-semibold">Tetapkan Sebagai</label>
                                         <div class="input-group">
                                             <span class="input-group-text px-6" id="basic-addon1"><i
-                                                    class="ti ti-lock fs-6"></i></span>
+                                                    class="ti ti-fingerprint fs-6"></i></span>
                                             <select name="role" id="role" class="form-select">
                                             @role('developer')<option value="developer" {{$user->getRoleNames()[0] == 'developer' ? 'selected' : ''}}>Developer</option>@endrole
-                                            <option value="marketing" {{$user->getRoleNames()[0] == 'marketing' ? 'selected' : ''}}>Marketing</option>
+                                            <option value="employee" {{$user->getRoleNames()[0] == 'employee' ? 'selected' : ''}}>Employee</option>
                                             <option value="admin" {{$user->getRoleNames()[0] == 'admin' ? 'selected' : ''}}>Admin</option>
+                                            <option value="pelanggan" {{$user->getRoleNames()[0] == 'pelanggan' ? 'selected' : ''}}>Pelanggan</option>
                                             </select>
                                         </div>
                                         @error('email')

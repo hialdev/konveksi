@@ -84,6 +84,22 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-4">
+                                    <label class="form-label fw-semibold">Jabatan</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text px-6" id="basic-addon1"><i
+                                                class="ti ti-user-exclamation fs-6"></i></span>
+                                        <input type="text" name="position" class="form-control ps-2"
+                                            placeholder="Jabatan" value="{{old('position')}}">
+                                    </div>
+                                    @error('position')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-4">
                                     <label class="form-label fw-semibold">Email</label>
                                     <div class="input-group">
                                         <span class="input-group-text px-6" id="basic-addon1"><i
@@ -92,6 +108,22 @@
                                             placeholder="user@mail.com" value="{{old('email')}}">
                                     </div>
                                     @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-semibold">Phone / Whatsapp</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text px-6" id="basic-addon1"><i
+                                                class="ti ti-phone fs-6"></i></span>
+                                        <input type="number" name="phone" class="form-control ps-2"
+                                            placeholder="user@mail.com" value="{{old('phone')}}">
+                                    </div>
+                                    @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             {{ $message }}
                                         </span>
@@ -108,7 +140,7 @@
                                                 class="ti ti-lock fs-6"></i></span>
                                         <input type="password" name="password" class="form-control ps-2">
                                     </div>
-                                    @error('name')
+                                    @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             {{ $message }}
                                         </span>
@@ -123,7 +155,7 @@
                                                 class="ti ti-lock fs-6"></i></span>
                                         <input type="password" name="confirm_password" class="form-control ps-2">
                                     </div>
-                                    @error('email')
+                                    @error('confirm_password')
                                         <span class="invalid-feedback" role="alert">
                                             {{ $message }}
                                         </span>
@@ -133,17 +165,18 @@
                             @role(['developer', 'admin'])
                             <div class="col-12">
                                 <div class="mb-4">
-                                    <label class="form-label fw-semibold">Tetapkan Sebagai</label>
+                                    <label class="form-label fw-semibold">Hak akses Sebagai</label>
                                     <div class="input-group">
                                         <span class="input-group-text px-6" id="basic-addon1"><i
-                                                class="ti ti-lock fs-6"></i></span>
+                                                class="ti ti-fingerprint fs-6"></i></span>
                                         <select name="role" id="role" class="form-select">
                                           @role('developer')<option value="developer">Developer</option>@endrole
-                                          <option value="marketing" selected>Marketing</option>
+                                          <option value="employee" selected>Employee</option>
                                           <option value="admin">Admin</option>
+                                          <option value="pelanggan">Pelanggan</option>
                                         </select>
                                     </div>
-                                    @error('email')
+                                    @error('role')
                                         <span class="invalid-feedback" role="alert">
                                             {{ $message }}
                                         </span>
