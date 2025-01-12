@@ -69,12 +69,9 @@ class CustomOrder extends Model
         return $this->hasMany(CustomOrderPayment::class, 'pesanan_khusus_id');
     }
 
-    public function getRemainingPayment()
+    public function getRemainingPaymentAttribute()
     {
-        // Menghitung total pembayaran valid (status = 1)
-        $totalDibayar = $this->payments()->where('status', 1)->sum('total_dibayar');
-
-        // Menghitung sisa pembayaran
-        return $this->total_harga - $totalDibayar;
+        $totalDibayar = $this->payments()->where('status', '2')->sum('total_dibayar');
+        return max($this->total_harga - $totalDibayar, 0);
     }
 }

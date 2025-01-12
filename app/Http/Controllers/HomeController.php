@@ -19,6 +19,7 @@ class HomeController extends Controller
     public function index()
     {
         $role = auth()->user() !== null ? auth()->user()->getRoleNames()[0] : '';
+        
         $isAdmin = in_array($role, ['admin', 'developer']);
 
         return view('dashboard.index');

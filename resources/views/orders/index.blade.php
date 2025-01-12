@@ -251,6 +251,8 @@
                                                     <i class="fs-4 ti ti-credit-card"></i>Bayar & Upload   
                                                 </a>
                                             </li>
+                                            @endif
+                                            @if($order->status == '1')
                                             <li>
                                                 <button type="button" class="dropdown-item d-flex align-items-center text-success gap-3"
                                                     data-bs-toggle="modal" data-bs-target="#approveModal-{{$order->id}}">

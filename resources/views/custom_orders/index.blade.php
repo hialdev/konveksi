@@ -198,12 +198,12 @@
                                             <div class="fs-3 fw-bold text-primary">{{formatRupiah($corder->total_harga)}}</div>
                                         </div>
                                         <div class="mb-2">
-                                            <div class="fs-1">Dibayarkan</div>
-                                            <div class="fs-3 fw-bold text-success">{{formatRupiah($corder->total_harga)}}</div>
+                                            <div class="fs-1">Pembayaran Valid</div>
+                                            <div class="fs-3 fw-bold text-success">{{formatRupiah($corder->remaining_payment ? $corder->total_harga - $corder->remaining_payment : $corder->total_harga)}}</div>
                                         </div>
                                         <div class="mb-2">
                                             <div class="fs-1">Sisa</div>
-                                            <div class="fs-3 fw-bold text-danger">{{formatRupiah(0)}}</div>
+                                            <div class="fs-3 fw-bold text-danger">{{formatRupiah($corder->remaining_payment)}}</div>
                                         </div>
                                     @else
                                         <div class="text-danger fw-bold fs-2" style="max-width: 13em; white-space:normal">

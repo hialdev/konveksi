@@ -23,7 +23,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="POST" action="{{ route('password.update') }}">
+                        <form method="POST" action="/register">
                             @csrf
 
                             <div class="mb-3">

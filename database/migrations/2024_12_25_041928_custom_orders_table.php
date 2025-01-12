@@ -32,7 +32,7 @@ return new class extends Migration
             $table->integer('qty')->default(0);
             $table->bigInteger('total_harga')->nullable();
             $table->enum('status', [0, 1, 2, 3, 4, 5])->default(0); //0 : Waiting Price, 1: Harga ditetapkan, 2: Nego, 3: Reject, 4: Approve, 5: Selesai
-            $table->enum('status_pembayaran', [0, 1, 2])->default(0); //0 : menunggu, 1: bertahap, 2: lunas
+            $table->enum('status_pembayaran', [0, 1, 2])->default(0); //0 : menunggu, 1: sedang dibayar, 2: lunas
             $table->text('keterangan_konveksi')->nullable(); // Description dari konveksi saat action
             $table->text('keterangan_pelanggan')->nullable(); // Description dari customer saat action
 

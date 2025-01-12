@@ -189,12 +189,12 @@
                                             <div class="fs-3 fw-bold text-primary">{{formatRupiah($corder->total_harga)}}</div>
                                         </div>
                                         <div class="mb-2">
-                                            <div class="fs-1">Dibayarkan</div>
-                                            <div class="fs-3 fw-bold text-success">{{formatRupiah($corder->total_harga)}}</div>
+                                            <div class="fs-1">Pembayaran Valid</div>
+                                            <div class="fs-3 fw-bold text-success">{{formatRupiah($corder->remaining_payment ? $corder->total_harga - $corder->remaining_payment : $corder->total_harga)}}</div>
                                         </div>
                                         <div class="mb-2">
                                             <div class="fs-1">Sisa</div>
-                                            <div class="fs-3 fw-bold text-danger">{{formatRupiah(0)}}</div>
+                                            <div class="fs-3 fw-bold text-danger">{{formatRupiah($corder->remaining_payment)}}</div>
                                         </div>
                                     @else
                                         <div class="text-danger fw-bold fs-2" style="max-width: 13em; white-space:normal">
@@ -463,14 +463,14 @@
                                                 @endrole
                                                 @role(['pelanggan', 'developer'])
                                                 <button type="button" class="d-flex btn-sm align-items-center gap-2 btn btn-warning"
-                                                    data-bs-toggle="modal" data-bs-target="#negoHargaModal-{{$corder->id}}"><i
+                                                    data-bs-toggle="modal" data-bs-target="#negoHargaModal-{{$corder->id}}" {{(int) $corder->status > 1 ? 'disabled' : ''}}><i
                                                         class="fs-4 ti ti-tag"></i>Nego Harga</button>
                                                 @endrole
                                                 <button type="button" class="d-flex btn-sm align-items-center gap-2 btn btn-success"
-                                                    data-bs-toggle="modal" data-bs-target="#okModal-{{$corder->id}}"><i
+                                                    data-bs-toggle="modal" data-bs-target="#okModal-{{$corder->id}}" {{(int) $corder->status > 2 ? 'disabled' : ''}}><i
                                                         class="fs-4 ti ti-check"></i>Sepakat & Produksi</button>
                                                 <button type="button" class="d-flex btn-sm align-items-center gap-2 btn btn-outline-danger"
-                                                    data-bs-toggle="modal" data-bs-target="#rejectModal-{{$corder->id}}"><i
+                                                    data-bs-toggle="modal" data-bs-target="#rejectModal-{{$corder->id}}" {{(int) $corder->status > 2 ? 'disabled' : ''}}><i
                                                         class="fs-4 ti ti-file-off"></i>Tolak</button>
                                                         
                                             </div>
