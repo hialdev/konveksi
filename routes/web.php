@@ -93,8 +93,8 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/order/{id}/review',[OrderController::class, 'review'])->name('order.review');
     Route::post('/order/{id}/retur',[OrderController::class, 'retur'])->name('order.retur');
     
-    Route::get('/pdf/preview/{bladePath}/{type}/{id}', [PDFController::class, 'preview'])->where('bladePath', '.*');
-    Route::get('/pdf/download/{bladePath}/{type}/{id}', [PDFController::class, 'download'])->where('bladePath', '.*');
+    Route::get('/pdf/preview/{bladePath}/{type}/{id}', [PDFController::class, 'preview'])->where('bladePath', '.*')->name('pdf.preview');
+    Route::get('/pdf/download/{bladePath}/{type}/{id}', [PDFController::class, 'download'])->where('bladePath', '.*')->name('pdf.download');
 
     Route::get('/product',[ProductController::class, 'index'])->name('product.index');
     Route::get('/raw-material',[RawMaterialController::class, 'index'])->name('raw_material.index');

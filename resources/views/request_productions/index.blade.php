@@ -140,12 +140,12 @@
                                 </td>
                                 <td>
                                     <div class="d-flex align-items-center" style="width:20em">
-                                        <img src="{{ $req->product->image ? asset('storage/' . $req->product->image) : '/assets/images/profile/user-1.jpg' }}"
-                                            class="rounded-2" alt="Raw Material Image {{ $req->product->nama }}" style="width: 4em" />
+                                        <img src="{{ $req->product?->image ? asset('storage/' . $req->product?->image) : '/assets/images/profile/user-1.jpg' }}"
+                                            class="rounded-2" alt="Raw Material Image {{ $req->product?->nama }}" style="width: 4em" />
                                         <div class="ms-3">
-                                            <h6 class="fw-semibold mb-1">{{ $req->product->nama }}</h6>
+                                            <h6 class="fw-semibold mb-1">{{ $req->product?->nama }}</h6>
                                             <span class="fw-normal line-clamp line-clamp-2"
-                                                style="white-space:normal; font-size:13px; ">{{ $req->product->keterangan }}</span>
+                                                style="white-space:normal; font-size:13px; ">{{ $req->product?->keterangan }}</span>
                                         </div>
                                     </div>
                                 </td>

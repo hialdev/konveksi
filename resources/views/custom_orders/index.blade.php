@@ -254,6 +254,11 @@
                                             <i class="ti ti-dots fs-5"></i>
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li>
+                                                <a href="{{route('pdf.preview', ['bladePath' => 'custom_orders.invoice' ,'type' => 'custom','id'=>$corder->id])}}" target="_blank" class="dropdown-item d-flex align-items-center gap-3 text-secondary">
+                                                    <i class="fs-4 ti ti-file-invoice"></i>Cetak Invoice   
+                                                </a>
+                                            </li>
                                             @if($corder->status == 0)
                                             <li>
                                                 <button type="button" class="dropdown-item d-flex text-primary align-items-center gap-3"

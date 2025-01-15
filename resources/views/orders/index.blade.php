@@ -245,6 +245,11 @@
                                             <i class="ti ti-dots fs-5"></i>
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li>
+                                                <a href="{{route('pdf.preview', ['bladePath' => 'orders.invoice' ,'type' => 'order','id'=>$order->id])}}" target="_blank" class="dropdown-item d-flex align-items-center gap-3 text-secondary">
+                                                    <i class="fs-4 ti ti-file-invoice"></i>Cetak Invoice   
+                                                </a>
+                                            </li>
                                             @if($order->status == '0')
                                             <li>
                                                 <a href="{{route('order.payment', $order->id)}}" class="dropdown-item d-flex align-items-center gap-3 text-primary">

@@ -162,10 +162,11 @@
                                                     @foreach ($produks as $item)
                                                         @php
                                                             $produk = \App\Models\Product::find($item['id']);
-                                                            $subtotal = $produk->harga * $item['qty'];
+                                                            $subtotal = $produk ? $produk->harga * $item['qty'] : 0;
                                                             $totalPrice += $subtotal;
                                                             $finalPrice = $totalPrice + ($totalPrice * (int) setting('site.ppn') / 100);
                                                         @endphp
+                                                        @if($produk)
                                                         <div class="d-flex align-items-center justify-content-between gap-3 w-100">
                                                             <img src="{{$produk->image ? '/storage/'.$produk->image : 'https://placehold.co/400'}}" alt="Image Cart of produk {{$produk->title}}" class="d-block rounded-3" style="aspect-ratio:1/1;height:5em">
                                                             <div>
@@ -184,6 +185,7 @@
                                                                 {{ formatRupiah($subtotal) }}
                                                             </div>
                                                         </div>
+                                                        @endif
                                                     @endforeach
                                                     <div class="py-2 d-flex justify-content-between">
                                                         PPN
@@ -254,6 +256,11 @@
                                             <i class="ti ti-dots fs-5"></i>
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li>
+                                                <a href="{{route('pdf.preview', ['bladePath' => 'orders.invoice' ,'type' => 'order','id'=>$order->id])}}" target="_blank" class="dropdown-item d-flex align-items-center gap-3 text-secondary">
+                                                    <i class="fs-4 ti ti-file-invoice"></i>Cetak Invoice   
+                                                </a>
+                                            </li>
                                             @if($order->status == '0')
                                             <li>
                                                 <a href="{{route('order.payment', $order->id)}}" class="dropdown-item d-flex align-items-center gap-3 text-primary">
@@ -304,6 +311,7 @@
                                                             @php
                                                                 $produk = \App\Models\Product::find($item['id']);
                                                             @endphp
+                                                            @if($produk)
                                                             <div class="d-flex mb-2 align-items-center gap-3 justify-content-between">
                                                                 <div class="d-flex align-items-center justify-content-start gap-3 w-100">
                                                                     <img src="{{$produk->image ? '/storage/'.$produk->image : 'https://placehold.co/400'}}" alt="Image Cart of produk {{$produk->title}}" class="d-block rounded-3" style="aspect-ratio:1/1;height:5em">
@@ -321,6 +329,7 @@
                                                                     <input name="rating-{{$produk->id}}" type="range" class="star-range" min="1" max="5" value="3" style="display: none;">
                                                                 </div>
                                                             </div>
+                                                            @endif
                                                         @endforeach
                                                         
                                                         <div class="p-3 rounded-4 bg-light mb-3">

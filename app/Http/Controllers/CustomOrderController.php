@@ -186,7 +186,7 @@ class CustomOrderController extends Controller
                 $custom->cek_bahan_dari_pelanggan = 0;
             }
 
-            $route = 'customer.index';
+            $route = 'custom-order.index';
             if(auth()->user()->getRoleNames()[0] == 'pelanggan'){
                 $custom->user_id = auth()->user()->id;
                 $route = 'custom-order.my';
