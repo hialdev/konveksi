@@ -31,7 +31,7 @@ class ReturController extends Controller
             $code = null;
             if($retur->cek_pesanan_khusus){
                 $custom = CustomOrder::find($retur->pesanan_khusus_id);
-                $custom->status = '';
+                $custom->status = '5';
                 $code = $custom->code;
                 $custom->save();
             }else{
@@ -68,7 +68,7 @@ class ReturController extends Controller
             $code = null;
             if($retur->cek_pesanan_khusus){
                 $custom = CustomOrder::find($retur->pesanan_khusus_id);
-                $custom->status = '';
+                $custom->status = '5';
                 $code = $custom->code;
                 $custom->save();
             }else{

@@ -4,13 +4,13 @@
         <div class="card-body px-4 py-3">
             <div class="row align-items-center">
                 <div class="col-9">
-                    <h4 class="fw-semibold mb-8">Add New User</h4>
+                    <h4 class="fw-semibold mb-8">Tambah Baru User</h4>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
                                 <a class="text-muted text-decoration-none" href="{{ route('user.index') }}">Users</a>
                             </li>
-                            <li class="breadcrumb-item" aria-current="page">Add New</li>
+                            <li class="breadcrumb-item" aria-current="page">Tambah Baru</li>
                         </ol>
                     </nav>
                 </div>
@@ -38,7 +38,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="px-4 py-3 border-bottom">
-                    <h5 class="card-title fw-semibold mb-0">Add User</h5>
+                    <h5 class="card-title fw-semibold mb-0">Tambah User</h5>
                 </div>
                 <div class="card-body p-4">
                     @if ($errors->any())
@@ -171,8 +171,8 @@
                                                 class="ti ti-fingerprint fs-6"></i></span>
                                         <select name="role" id="role" class="form-select">
                                           @role('developer')<option value="developer">Developer</option>@endrole
-                                          <option value="employee" selected>Employee</option>
-                                          <option value="admin">Admin</option>
+                                          <option value="employee" selected>Pegawai</option>
+                                          <option value="admin">Pemilik</option>
                                           <option value="pelanggan">Pelanggan</option>
                                         </select>
                                     </div>

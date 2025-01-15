@@ -9,6 +9,7 @@ use App\Http\Controllers\BankController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomOrderController;
 use App\Http\Controllers\CustomOrderPaymentController;
+use App\Http\Controllers\DesainController;
 use App\Http\Controllers\FlyerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCategoryController;
@@ -70,6 +71,7 @@ Route::get('/etalase/{slug}',[ProductController::class, 'show'])->name('product.
 Route::post('/etalase/add-to-cart',[ProductController::class, 'addCart'])->name('product.addCart');
 Route::post('/etalase/min-qty',[ProductController::class, 'minQty'])->name('product.minQty');
 Route::post('/etalase/add-qty',[ProductController::class, 'addQty'])->name('product.addQty');
+Route::post('/etalase/updateQty', [ProductController::class, 'updateQty'])->name('product.updateQty');
 
 Route::get('/order/add', [OrderController::class, 'add'])->name('order.add');
 
@@ -113,8 +115,6 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/request-production/{id}/update',[RequestProductionController::class, 'update'])->name('request_production.update');
     Route::post('/request-production/{id}/process',[RequestProductionController::class, 'process'])->name('request_production.process');
 
-    Route::get('/custom-order', [CustomOrderController::class, 'index'])->name('custom-order.index');
-    Route::get('/custom-order/waiting', [CustomOrderController::class, 'waiting'])->name('custom-order.waiting');
     Route::get('/custom-order/my', [CustomOrderController::class, 'my'])->name('custom-order.my');
     Route::get('/custom-order/add', [CustomOrderController::class, 'add'])->name('custom-order.add');
     Route::post('/custom-order/store', [CustomOrderController::class, 'store'])->name('custom-order.store');
@@ -123,6 +123,12 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/custom-order/{id}/nego', [CustomOrderController::class, 'nego'])->name('custom-order.nego');
     Route::post('/custom-order/{id}/approve',[CustomorderController::class, 'approve'])->name('custom-order.approve');
     Route::post('/custom-order/{id}/rejected', [CustomOrderController::class, 'rejected'])->name('custom-order.rejected');
+    Route::post('/custom-order/{id}/retur',[CustomOrderController::class, 'retur'])->name('custom-order.retur');
+
+    Route::get('/desain',[DesainController::class, 'index'])->name('desain.index');
+    Route::post('/desain/store',[DesainController::class, 'store'])->name('desain.store');
+    Route::post('/desain/{id}/update',[DesainController::class, 'update'])->name('desain.update');
+    Route::delete('/desain/{id}/destroy',[DesainController::class, 'destroy'])->name('desain.destroy');
 
     Route::get('/custom-order/{id}/payment', [CustomOrderPaymentController::class, 'index'])->name('custom-order.payment.index');
     Route::middleware('check.sepakat')->group(function (){
@@ -145,6 +151,8 @@ Route::middleware(['auth'])->group(function(){
         
         Route::delete('/order/{id}/destroy',[OrderController::class, 'destroy'])->name('order.destroy');
         
+        Route::get('/custom-order', [CustomOrderController::class, 'index'])->name('custom-order.index');
+        Route::get('/custom-order/waiting', [CustomOrderController::class, 'waiting'])->name('custom-order.waiting');
         Route::post('/custom-order/{id}/putPrice',[CustomorderController::class, 'putPrice'])->name('custom-order.putPrice');
         Route::delete('/custom-order/{id}/destroy',[CustomorderController::class, 'destroy'])->name('custom-order.destroy');
 

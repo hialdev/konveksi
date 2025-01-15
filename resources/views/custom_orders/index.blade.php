@@ -111,15 +111,16 @@
                                             {{ $corder->qty }} Qty
                                         </div>
                                         
-                                        <div class="mb-1 mt-2 fw-semibold badge bg-danger p-1 px-2 fs-2 gap-1 d-inline-flex align-items-center text-truncate" 
-                                            style="max-width: 15rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                            <i class="ti ti-clock fs-4"></i> {{\Carbon\Carbon::parse($corder->deadline)->format('d M Y')}}
-                                        </div>
                                         <a href="{{$corder->lampiran ? '/storage/'.$corder->lampiran : '#'}}"  target="_blank"
                                             class="mb-1 mt-2 fw-semibold badge {{$corder->lampiran ? 'bg-primary-subtle text-primary' : 'bg-danger-subtle text-danger'}} p-1 px-2 fs-2 gap-1 d-inline-flex align-items-center text-truncate" 
                                             style="max-width: 15rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                             <i class="ti ti-file fs-4"></i> {{$corder->lampiran ?? 'Tidak ada lampiran'}}
                                         </a>
+                                        <div class="mb-1 mt-2 fw-semibold badge bg-danger p-1 px-2 fs-2 gap-1 d-inline-flex align-items-center text-truncate" 
+                                            style="max-width: 15rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                            <i class="ti ti-clock fs-4"></i> {{\Carbon\Carbon::parse($corder->deadline)->format('d M Y')}}
+                                        </div>
+                                        <p class="fs-2 text-danger">Selesaikan 2 hari sebelum deadline</p>
                                     </div>
                                 </td>
                                 <td>
@@ -161,8 +162,38 @@
                                                 style="white-space:normal; font-size:13px; ">{{ $corder->product->keterangan }}</span>
                                         </div>
                                     </div>
-                                    <div class="fw-normal text-muted fs-2 line-clamp my-1 line-clamp-3"
-                                                style="white-space:normal;">{{ $corder->keterangan }}</div>
+                                    @if($corder->desain)
+                                    
+                                    <button class="d-flex align-items-center gap-2 btn btn-primary btn-sm mt-2"
+                                        data-bs-toggle="modal" data-bs-target="#desainModal-{{$corder->desain->id}}"
+                                    >
+                                        <i class="ti ti-paint fs-6"></i>
+                                        Detail Konsep / Desain
+                                    </button>
+
+                                    <!-- Desain Konsep Modal -->
+                                    <div class="modal fade" id="desainModal-{{$corder->desain->id}}" tabindex="-1" aria-labelledby="vertical-center-modal"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                            <div class="modal-content">
+                                                <div class="modal-header d-flex align-items-center">
+                                                    <h4 class="modal-title" id="myLargeModalLabel">
+                                                        Detail Desain / Konsep
+                                                    </h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a href="{{$corder->desain->lampiran ? '/storage/'.$corder->desain->lampiran : '#'}}" target="_blank" class="btn mb-2 bg-primary-subtle text-primary d-flex text-decoration-none align-items-center gap-2">
+                                                        <i class="ti ti-file fs-2"></i>
+                                                        Lampiran Konsep
+                                                    </a>
+                                                    <div class="fw-bold mb-2">{{$corder->desain->nama}}</div>
+                                                    <div class="fs-3 text-dark mb-2">{{$corder->desain->keterangan}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </td>
                                 <td>
                                     <div class="d-flex align-items-center" style="width:20em">
@@ -236,7 +267,7 @@
                                             </li>
                                             @endif
 
-                                            @if($corder->status == '5')
+                                            @if($corder->status == '6')
                                             <li>
                                                 <button type="button" class="dropdown-item d-flex align-items-center text-success gap-3"
                                                     data-bs-toggle="modal" data-bs-target="#verifReturModal-{{$corder->id}}">
@@ -348,71 +379,71 @@
                                             <!-- /.modal-content -->
                                         </div>
                                         <!-- /.modal-dialog -->
-
-                                        @if($corder->retur)
-                                        <!-- Verifikasi Retur Modal -->
-                                        <div class="modal fade" id="verifReturModal-{{$corder->id}}" tabindex="-1"
-                                            aria-labelledby="vertical-center-modal" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                                <div class="modal-content">
-                                                    <div class="modal-header d-flex align-items-center">
-                                                        <h4 class="modal-title" id="myLargeModalLabel">
-                                                            Tetapkan Valid / Approve Pengembalian
-                                                        </h4>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body pt-0" style="white-space:normal !important">
-                                                        <p>Jika pengembalian disetujui, <strong>pastikan solusi pengembalian sudah diterima dengan baik oleh Pelanggan seperti Refund atau Tukar Barang</strong>.</p>
-                                                        <form action="{{route('retur.approve', $corder->retur->id)}}" method="post" enctype="multipart/form-data">
-                                                            @csrf
-                                                            <div class="mb-3">
-                                                                <label for="lampiran" class="form-label">Lampirkan Bukti Approve Pengembalian</label>
-                                                                <input type="file" name="lampiran" id="lampiran" class="form-control" required>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="keterangan" class="form-label">Keterangan</label>
-                                                                <textarea name="keterangan" id="keterangan" cols="30" rows="5" class="form-control"></textarea>
-                                                            </div>
-                                                            <button type="submit" class="btn btn-success">Setujui dan Selesaikan Pengembalian</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- reject Retur Modal -->
-                                        <div class="modal fade" id="rejectReturModal-{{$corder->id}}" tabindex="-1"
-                                            aria-labelledby="vertical-center-modal" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                                <div class="modal-content">
-                                                    <div class="modal-header d-flex align-items-center">
-                                                        <h4 class="modal-title" id="myLargeModalLabel">
-                                                            Tetapkan Pengembalian Tidak Valid / Reject
-                                                        </h4>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body pt-0" style="white-space:normal !important">
-                                                        <p>Tetapkan pesanan dengan kode <strong>{{$corder->code}} sebagai Tidak Valid / Tolak, Pastikan semua telah di cek dengan baik.</strong></p>
-                                                        <form action="{{route('retur.rejected', $corder->retur->id)}}" method="post" enctype="multipart/form-data">
-                                                            @csrf
-                                                            <div class="mb-3">
-                                                                <label for="lampiran" class="form-label">Lampirkan Bukti Penolakan</label>
-                                                                <input type="file" name="lampiran" id="lampiran" class="form-control" required>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="keterangan" class="form-label">Keterangan Penolakan</label>
-                                                                <textarea name="keterangan" id="keterangan" cols="30" rows="5" class="form-control"></textarea>
-                                                            </div>
-                                                            <button type="submit" class="btn btn-danger">Reject / Invalid Pengembalian</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @endif
                                     </div>
+
+                                    @if($corder->retur || $corder->status == '6')
+                                    <!-- Verifikasi Retur Modal -->
+                                    <div class="modal fade" id="verifReturModal-{{$corder->id}}" tabindex="-1"
+                                        aria-labelledby="vertical-center-modal" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                            <div class="modal-content">
+                                                <div class="modal-header d-flex align-items-center">
+                                                    <h4 class="modal-title" id="myLargeModalLabel">
+                                                        Tetapkan Valid / Approve Pengembalian
+                                                    </h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body pt-0" style="white-space:normal !important">
+                                                    <p>Jika pengembalian disetujui, <strong>pastikan solusi pengembalian sudah diterima dengan baik oleh Pelanggan seperti Refund atau Tukar Barang</strong>.</p>
+                                                    <form action="{{route('retur.approve', $corder->retur->id)}}" method="post" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="mb-3">
+                                                            <label for="lampiran" class="form-label">Lampirkan Bukti Approve Pengembalian</label>
+                                                            <input type="file" name="lampiran" id="lampiran" class="form-control" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="keterangan" class="form-label">Keterangan</label>
+                                                            <textarea name="keterangan" id="keterangan" cols="30" rows="5" class="form-control"></textarea>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-success">Setujui dan Selesaikan Pengembalian</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- reject Retur Modal -->
+                                    <div class="modal fade" id="rejectReturModal-{{$corder->id}}" tabindex="-1"
+                                        aria-labelledby="vertical-center-modal" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                            <div class="modal-content">
+                                                <div class="modal-header d-flex align-items-center">
+                                                    <h4 class="modal-title" id="myLargeModalLabel">
+                                                        Tetapkan Pengembalian Tidak Valid / Reject
+                                                    </h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body pt-0" style="white-space:normal !important">
+                                                    <p>Tetapkan pesanan dengan kode <strong>{{$corder->code}} sebagai Tidak Valid / Tolak, Pastikan semua telah di cek dengan baik.</strong></p>
+                                                    <form action="{{route('retur.rejected', $corder->retur->id)}}" method="post" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="mb-3">
+                                                            <label for="lampiran" class="form-label">Lampirkan Bukti Penolakan</label>
+                                                            <input type="file" name="lampiran" id="lampiran" class="form-control" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="keterangan" class="form-label">Keterangan Penolakan</label>
+                                                            <textarea name="keterangan" id="keterangan" cols="30" rows="5" class="form-control"></textarea>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-danger">Reject / Invalid Pengembalian</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </td>
                             </tr>
 
@@ -464,9 +495,17 @@
                                                         <i class="fs-4 ti ti-credit-card"></i>Kelola Pembayaran
                                                     </a>
                                                     @role(['admin', 'developer', 'pegawai'])
-                                                    <a href="{{route('request_production.add', ['rawid' => $corder->bahan_baku_id ?? '' ,'customid' => $corder->id, 'productid' => $corder->produk_id, 'qty' => $corder->qty, 'deadline' => $corder->deadline, 'description' => $corder->keterangan])}}" class="d-flex btn-sm align-items-center gap-2 btn btn-primary">
+                                                    <a href="{{ route('request_production.add', [
+                                                        'rawid' => $corder->bahan_baku_id ?? '',
+                                                        'customid' => $corder->id,
+                                                        'productid' => $corder->produk_id,
+                                                        'qty' => $corder->qty,
+                                                        'deadline' => \Carbon\Carbon::parse($corder->deadline)->subDays(2)->format('Y-m-d'),
+                                                        'description' => $corder->keterangan
+                                                    ]) }}" class="d-flex btn-sm align-items-center gap-2 btn btn-primary">
                                                         <i class="fs-4 ti ti-wand"></i>Ajukan Produksi
                                                     </a>
+
                                                     @endrole
                                                 </div>
                                             @endif

@@ -168,8 +168,8 @@
                                                     class="ti ti-fingerprint fs-6"></i></span>
                                             <select name="role" id="role" class="form-select">
                                             @role('developer')<option value="developer" {{$user->getRoleNames()[0] == 'developer' ? 'selected' : ''}}>Developer</option>@endrole
-                                            <option value="employee" {{$user->getRoleNames()[0] == 'employee' ? 'selected' : ''}}>Employee</option>
-                                            <option value="admin" {{$user->getRoleNames()[0] == 'admin' ? 'selected' : ''}}>Admin</option>
+                                            <option value="employee" {{$user->getRoleNames()[0] == 'employee' ? 'selected' : ''}}>Pegawai</option>
+                                            <option value="admin" {{$user->getRoleNames()[0] == 'admin' ? 'selected' : ''}}>Pemilik</option>
                                             <option value="pelanggan" {{$user->getRoleNames()[0] == 'pelanggan' ? 'selected' : ''}}>Pelanggan</option>
                                             </select>
                                         </div>

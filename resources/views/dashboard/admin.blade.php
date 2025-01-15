@@ -93,7 +93,7 @@
         <!--  Owl carousel -->
         <div class="owl-carousel counter-carousel owl-theme">
             <div class="item">
-                <div class="card border-0 zoom-in bg-primary-subtle shadow-none">
+                <a href="{{route('user.index')}}" class="card border-0 zoom-in bg-primary-subtle shadow-none">
                     <div class="card-body">
                         <div class="text-center">
                             <img src="/assets/images/svgs/icon-user-male.svg" width="50" height="50" class="mb-3"
@@ -104,10 +104,10 @@
                             <h5 class="fw-semibold text-primary mb-0">{{ \App\Models\User::role('employee')->count() }}</h5>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="item">
-                <div class="card border-0 zoom-in bg-warning-subtle shadow-none">
+                <a href="{{route('customer.index')}}" class="card border-0 zoom-in bg-warning-subtle shadow-none">
                     <div class="card-body">
                         <div class="text-center">
                             <img src="/assets/images/svgs/icon-briefcase.svg" width="50" height="50" class="mb-3"
@@ -116,10 +116,10 @@
                             <h5 class="fw-semibold text-primary mb-0">{{ \App\Models\User::role('pelanggan')->count() }}</h5>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="item">
-                <div class="card border-0 zoom-in bg-info-subtle shadow-none">
+                <a href="{{route('order.index')}}" class="card border-0 zoom-in bg-info-subtle shadow-none">
                     <div class="card-body">
                         <div class="text-center">
                             <img src="/assets/images/svgs/icon-mailbox.svg" width="50" height="50" class="mb-3"
@@ -128,10 +128,10 @@
                             <h5 class="fw-semibold text-info mb-0">{{ \App\Models\Order::count() }}</h5>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="item">
-                <div class="card border-0 zoom-in bg-light shadow-none" style="aspect-ratio:1/1">
+                <a href="{{route('custom-order.index')}}" class="card border-0 zoom-in bg-light shadow-none" style="aspect-ratio:1/1">
                     <div class="card-body">
                         <div class="text-center">
                             <div class="mb-3 text-dark">
@@ -141,10 +141,10 @@
                             <h5 class="fw-semibold text-dark mb-0">{{ \App\Models\CustomOrder::count() }}</h5>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="item">
-                <div class="card border-0 zoom-in bg-success-subtle shadow-none">
+                <a href="{{route('request_production.index')}}" class="card border-0 zoom-in bg-success-subtle shadow-none">
                     <div class="card-body">
                         <div class="text-center">
                             <div class="mb-3">
@@ -154,10 +154,10 @@
                             <h5 class="fw-semibold text-dark mb-0">{{ \App\Models\RequestProduction::count() }}</h5>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="item">
-                <div class="card border-0 zoom-in bg-info-subtle shadow-none">
+                <a href="{{route('supplier.index')}}" class="card border-0 zoom-in bg-info-subtle shadow-none">
                     <div class="card-body">
                         <div class="text-center">
                             <img src="/assets/images/svgs/icon-connect.svg" width="50" height="50" class="mb-3"
@@ -166,7 +166,7 @@
                             <h5 class="fw-semibold text-info mb-0">{{ \App\Models\Supplier::count() }}</h5>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>

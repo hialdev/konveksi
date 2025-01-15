@@ -10,7 +10,7 @@
                             <li class="breadcrumb-item">
                                 <a class="text-muted text-decoration-none" href="{{ route('home') }}">Dashboard</a>
                             </li>
-                            <li class="breadcrumb-item" aria-current="page">All Users</li>
+                            <li class="breadcrumb-item" aria-current="page">Semua User</li>
                         </ol>
                     </nav>
                 </div>
@@ -27,7 +27,7 @@
         <div style="aspect-ratio:1/1; width:3em; height:3em"
             class="bg-primary text-white d-flex align-items-center justify-content-center rounded-5 me-auto">
             {{ count($users) }}</div>
-        <a href="{{ route('user.add') }}" class="btn btn-primary btn-al-primary">Add New</a>
+        <a href="{{ route('user.add') }}" class="btn btn-primary btn-al-primary">Tambah Baru</a>
     </div>
     <div class="table-responsive mb-4">
         <table class="table border text-nowrap mb-0 align-middle">
@@ -72,7 +72,17 @@
                     </td>
                     <td>
                         <div class="d-flex align-items-center gap-2">
-                            <span class="badge text-bg-primary rounded-3 fw-semibold fs-2">{{$user->getRoleNames()[0]}}</span>
+                        <span class="badge text-bg-primary rounded-3 fw-semibold fs-2">
+                            {{
+                                count($user->getRoleNames()) > 0 
+                                    ? ($user->getRoleNames()[0] === 'employee' 
+                                        ? 'pegawai' 
+                                        : ($user->getRoleNames()[0] === 'admin' 
+                                            ? 'admin / pemilik' 
+                                            : 'pelanggan'))
+                                    : 'Belum ada Peran'
+                            }}
+                        </span>
                         </div>
                     </td>
                     <td>

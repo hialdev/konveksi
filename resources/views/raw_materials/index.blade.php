@@ -77,6 +77,9 @@
                                 <h6 class="fs-3 fw-semibold mb-0">Bahan Baku</h6>
                             </th>
                             <th>
+                                <h6 class="fs-3 fw-semibold mb-0">Merek & Warna</h6>
+                            </th>
+                            <th>
                                 <h6 class="fs-3 fw-semibold mb-0">Status</h6>
                             </th>
                             <th>
@@ -98,6 +101,10 @@
                                                 style="white-space:normal; font-size:13px; ">{{ $raw_material->keterangan }}</span>
                                         </div>
                                     </div>
+                                </td>
+                                <td>
+                                    <div class="mb-2">{{$raw_material->merek}}</div>
+                                    <div class="">{{$raw_material->warna}}</div>
                                 </td>
                                 <td>
                                     <div class="d-inline-flex rounded-3 badge {{ $raw_material->cek_tersedia ? 'bg-primary' : 'bg-danger'}}">

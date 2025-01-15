@@ -11,7 +11,11 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a class="text-muted text-decoration-none" href="{{ route('custom-order.index') }}">Pesanan Khusus</a>
+                                @role('pelanggan')
+                                <a class="text-muted text-decoration-none" href="{{ route('custom-order.my') }}">Pesanan Khusus Saya</a>
+                                @else
+                                <a class="text-muted text-decoration-none" href="{{ route('custom-order.index') }}">Pesan Pesanan Khusus</a>
+                                @endrole
                             </li>
                             <li class="breadcrumb-item" aria-current="page">Perbarui Pesanan Khusus</li>
                         </ol>
@@ -174,32 +178,32 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="my-4">
-                            <label class="form-label fw-semibold">Jelaskan Pesanan Khusus</label>
+                        <div class="my-3">
+                            <label class="form-label fw-semibold">Dengan Desain / Konsep</label>
                             <div class="input-group">
                                 <span class="input-group-text px-6" id="basic-addon1"><i
-                                        class="ti ti-align-justified fs-6"></i></span>
-                                <textarea class="form-control ps-2" name="description" id="description" cols="20" rows="5"
-                                    placeholder="Jelaskan Pesanan Khusus Seperti apa yang anda ingin buat dengan lengkap">{{old('description', $corder->keterangan)}}</textarea>
+                                        class="ti ti-atom-2 fs-6"></i></span>
+                                <div style="flex-grow:1">
+                                    <select name="desain_id" id="desain_id" class="select2 form-select">
+                                        <option value="">-- Pilih Desain  / Konsep --</option>
+                                        @foreach ($desains as $desain)
+                                            <option value="{{$desain->id}}" {{$desain->id == old('desain_id', $corder->desain_id) ? 'selected' : ''}}>{{$desain->nama.' dari '.$desain->customer->email}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                            @error('description')
+                            @error('desain_id')
                                 <span class="invalid-feedback" role="alert">
                                     {{ $message }}
                                 </span>
                             @enderror
                         </div>
-                        <div class="mb-4">
-                            <label class="form-label fw-semibold">Lampirkan Foto / File Contoh Pesanan Khusus</label>
-                            <div class="input-group">
-                                <span class="input-group-text px-6" id="basic-addon1"><i
-                                        class="ti ti-file fs-6"></i></span>
-                                <input type="file" name="attachment" class="form-control ps-2">
-                            </div>
-                            @error('attachment')
-                                <span class="invalid-feedback" role="alert">
-                                    {{ $message }}
-                                </span>
-                            @enderror
+                        <div class="d-flex mb-3 align-items-center gap-2 mt-2">
+                            Tidak menemukan konsep / desain ? 
+                            <button type="button" class="btn btn-sm text-primary bg-primary-subtle"
+                                data-bs-toggle="modal"
+                                data-bs-target="#addDesainModal"
+                            >Tambah Desain</button>
                         </div>
                         <div class="mb-4">
                             <label class="form-label fw-semibold">Produksi Sebanyak (Qty)</label>

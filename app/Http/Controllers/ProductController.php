@@ -258,4 +258,37 @@ class ProductController extends Controller
         return redirect()->back()->with('success', 'Jumlah produk di keranjang berhasil ditambah');
     }
 
+    public function updateQty(Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required|exists:produk,id',
+            'qty' => 'required|integer|min:1',
+        ]);
+
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$request->get('product_id')])) {
+            $cart[$request->get('product_id')]['qty'] = $request->get('qty');
+        }
+
+        session()->put('cart', $cart);
+
+        $product = Product::find($request->get('product_id'));
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Jumlah produk di keranjang berhasil diperbarui',
+            'product_price' => $product->harga,
+            'ppn' => (int) setting('site.ppn'),
+            'cart' => collect($cart)->map(function ($item, $id) {
+                $product = Product::find($id);
+                return [
+                    'id' => $id,
+                    'harga' => $product->harga,
+                    'qty' => $item['qty']
+                ];
+            })->values()
+        ]);
+    }
+
 }

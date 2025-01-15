@@ -139,26 +139,26 @@
                                         <div class="fs-3 fw-semibold line-clamp line-clamp-2">{{ $cart->nama }}</div>
                                         <div class="fs-2 line-clamp line-clamp-2">{{ formatRupiah($cart->harga) }}</div>
                                         <div class="d-flex mt-2 align-items-center gap-2">
-                                            <form action="{{ route('product.minQty') }}" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="product_id" value="{{ $cart->id }}">
-                                                <button type="submit" class="btn btn-sm btn-danger"><i
-                                                        class="ti ti-minus"></i></button>
-                                            </form>
-                                            <input type="number" name="qty" disabled id="qty"
-                                                class="form-control form-control-sm" value="{{ $item['qty'] }}">
-                                            <form action="{{ route('product.addQty') }}" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="product_id" value="{{ $cart->id }}">
-                                                <button type="submit" class="btn btn-sm btn-primary"><i
-                                                        class="ti ti-plus"></i></button>
-                                            </form>
+                                            <input type="hidden" name="product_id" id="product_id_{{ $item['id'] }}" value="{{ $item['id'] }}">
+                                            <button type="button" class="btn btn-sm btn-danger" onclick="updateQuantity('decrement', '{{ $item['id'] }}')">
+                                                <i class="ti ti-minus"></i>
+                                            </button>
+                                            <input 
+                                                type="number" 
+                                                name="qty" 
+                                                id="qty_{{ $item['id'] }}" 
+                                                class="form-control form-control-sm" 
+                                                value="{{ $item['qty'] }}" 
+                                                onblur="updateQuantity('update', '{{ $item['id'] }}')">
+                                            <button type="button" class="btn btn-sm btn-primary" onclick="updateQuantity('increment', '{{ $item['id'] }}')">
+                                                <i class="ti ti-plus"></i>
+                                            </button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="d-flex mb-3 align-items-center gap-2 justify-content-between">
-                                    <div class="fs-2 fw-semibold">Sub Total</div>
-                                    <div class="fs-3 fw-bold">{{ formatRupiah($subtotal) }}</div>
+                                    <div class="flex-grow-1 d-flex flex-column align-items-end gap-2 justify-content-between">
+                                        <div class="fs-2 fw-semibold">Sub Total</div>
+                                        <div class="fs-3 fw-bold" id="subtotal_{{ $item['id'] }}">{{ formatRupiah($subtotal) }}</div>
+                                    </div>
                                 </div>
                             @empty
                                 <div class="text-center fs-3 p-5 border border-2 border-dashed border-primary rounded-4">Keranjang
@@ -167,7 +167,7 @@
                             <div class="pt-3 mt-3 border-top border-2">
                                 <div class="d-flex align-items-center gap-2 justify-content-between">
                                     <div class="fs-3 fw-semibold">Total</div>
-                                    <div class="fs-4 fw-bold">{{ formatRupiah($totalPrice) }}</div>
+                                    <div class="fs-4 fw-bold" id="totalPrice">{{ formatRupiah($totalPrice) }}</div>
                                 </div>
                                 <a href="{{ route('order.add') }}" class="btn btn-primary w-100 mt-2">Pesan Barang</a>
                             </div>
@@ -179,4 +179,62 @@
     </div>
 @endsection
 @section('scripts')
+<script>
+function updateQuantity(action, productId) {
+    const qtyInput = document.getElementById(`qty_${productId}`);
+    let qty = parseInt(qtyInput.value);
+
+    if (action === 'decrement' && qty > 1) {
+        qty -= 1;
+    } else if (action === 'increment') {
+        qty += 1;
+    }
+
+    // Update nilai input
+    qtyInput.value = qty;
+
+    // AJAX request untuk mengupdate kuantitas di server
+    fetch("{{ route('product.updateQty') }}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        },
+        body: JSON.stringify({ product_id: productId, qty: qty })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const price = parseFloat(data.product_price);
+            const subtotalElement = document.querySelector(`#subtotal_${productId}`);
+            const totalPriceElement = document.querySelector("#totalPrice");
+            const finalPriceElement = document.querySelector("#finalPrice");
+            const ppnPercentage = parseFloat("{{ setting('site.ppn') }}");
+
+            // Update subtotal
+            const subtotal = price * qty;
+            subtotalElement.textContent = formatRupiah(subtotal);
+
+            // Hitung ulang totalPrice
+            let totalPrice = 0;
+            data.cart.forEach(item => {
+                totalPrice += item.harga * item.qty;
+            });
+
+            // Hitung PPN dan finalPrice
+            const ppn = totalPrice * (ppnPercentage / 100);
+            const finalPrice = totalPrice + ppn;
+
+            // Update totalPrice dan finalPrice di UI
+            totalPriceElement.textContent = formatRupiah(totalPrice);
+            finalPriceElement.textContent = formatRupiah(finalPrice);
+        } else {
+            console.error("Gagal memperbarui jumlah produk:", data.message);
+        }
+    })
+    .catch(error => {
+        console.error("Terjadi kesalahan:", error);
+    });
+}
+</script>
 @endsection

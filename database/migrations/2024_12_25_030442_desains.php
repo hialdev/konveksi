@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
 
 return new class extends Migration
 {
@@ -14,15 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bahan_baku', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(Str::uuid());
-            $table->text('image')->nullable();
-            $table->string('nama');
-            $table->string('merek')->nullable();
-            $table->string('warna')->nullable();
-            $table->boolean('cek_tersedia')->default(1);
+        Schema::create('desains', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->unsignedBigInteger('user_id');
+            $table->text('lampiran')->nullable();
+            $table->string('nama')->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
+                    ->onDelete('cascade');
         });
     }
 
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bahan_baku');
+        Schema::dropIfExists('desains');
     }
 };

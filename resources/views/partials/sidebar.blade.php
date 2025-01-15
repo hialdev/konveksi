@@ -60,6 +60,14 @@
                         <span class="hide-menu">Pesanan Khusus Saya</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ Route::is('desain.index') ? 'selected' : '' }}">
+                    <a href="{{ route('desain.index') }}" class="sidebar-link" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-paint"></i>
+                        </span>
+                        <span class="hide-menu">Desain / Konsep Saya</span>
+                    </a>
+                </li>
                 {{-- <li class="sidebar-item {{ Route::is('etalase') ? 'selected' : '' }}">
                     <a href="{{ route('home') }}" class="sidebar-link" aria-expanded="false">
                         <span>
@@ -287,23 +295,23 @@
                                 </a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="{{ route('custom-order.waiting') }}" class="sidebar-link">
+                                <a href="{{ route('custom-order.add') }}" class="sidebar-link">
                                     <div class="round-16 d-flex align-items-center justify-content-center">
                                         <i class="ti ti-circle"></i>
                                     </div>
-                                    <span class="hide-menu">Menunggu Harga</span>
+                                    <span class="hide-menu">Buat Pesanan Khusus</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="sidebar-item">
+                    {{-- <li class="sidebar-item">
                         <a href="{{ route('home') }}" class="sidebar-link" aria-expanded="false">
                             <span>
                                 <i class="ti ti-truck-return"></i>
                             </span>
                             <span class="hide-menu">Pengembalian</span>
                         </a>
-                    </li>
+                    </li> --}}
 
                     @role(['admin', 'developer'])
                         <!-- ---------------------------------- -->

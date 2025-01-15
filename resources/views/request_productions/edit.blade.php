@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-3">
                     <div class="text-center mb-n5">
-                        <img src="../assets/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4" />
+                        <img src="/assets/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4" />
                     </div>
                 </div>
             </div>

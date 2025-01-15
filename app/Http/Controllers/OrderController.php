@@ -20,7 +20,7 @@ class OrderController extends Controller
         $filter = (object) [
             'q' => $request->get('search', ''),
             'field' => $request->get('field', 'created_at'),
-            'order' => $request->get('order') === 'newest' ? 'desc' : 'asc',
+            'order' => $request->get('order') === 'oldest' ? 'asc' : 'desc',
         ];
 
         $orders = Order::with('customer')
@@ -303,8 +303,8 @@ class OrderController extends Controller
             'keterangan' => 'required|string|min:4',
         ]);
         $order = Order::find($id);
-        if($order->reviews->count() > 0 || $order->status != '2'){
-            return redirect()->back()->withInput()->with('error', 'Pesanan '.$order->code.' status tidak valid atau telah di konfirmasi dan ulas, pesanan tidak bisa di kembalikan');
+        if($order->reviews->count() > 0 || $order->status != '2' || $order->retur){
+            return redirect()->back()->withInput()->with('error', 'Pesanan '.$order->code.' status tidak valid atau telah di konfirmasi dan ulas atau telah di retur, pesanan tidak bisa di kembalikan');
         }
         try {
             $retur = new Retur();

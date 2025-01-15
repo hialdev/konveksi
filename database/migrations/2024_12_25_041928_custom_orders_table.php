@@ -20,18 +20,17 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->uuid('bahan_baku_id')->nullable();
             $table->uuid('produk_id')->nullable();
+            $table->uuid('desain_id')->nullable();
 
             $table->boolean('cek_bahan_dari_pelanggan')->default(0);
             $table->text('lampiran_bahan')->nullable(); // Lampiran Bahan Baku
             $table->string('nama_bahan')->nullable(); // Nama Bahan baku
             $table->text('keterangan_bahan')->nullable(); // Penjelasan Bahan Baku
             
-            $table->text('lampiran')->nullable();
-            $table->text('keterangan'); // Penjelasan Pesanan Khususnya
             $table->date('deadline');
             $table->integer('qty')->default(0);
             $table->bigInteger('total_harga')->nullable();
-            $table->enum('status', [0, 1, 2, 3, 4, 5])->default(0); //0 : Waiting Price, 1: Harga ditetapkan, 2: Nego, 3: Reject, 4: Approve, 5: Selesai
+            $table->enum('status', [0, 1, 2, 3, 4, 5, 6])->default(0); //0 : Waiting Price, 1: Harga ditetapkan, 2: Nego, 3: Reject, 4: Approve, 5: Selesai, 6: Pengembalian
             $table->enum('status_pembayaran', [0, 1, 2])->default(0); //0 : menunggu, 1: sedang dibayar, 2: lunas
             $table->text('keterangan_konveksi')->nullable(); // Description dari konveksi saat action
             $table->text('keterangan_pelanggan')->nullable(); // Description dari customer saat action
@@ -41,6 +40,11 @@ return new class extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
+                ->onDelete('cascade');
+            
+            $table->foreign('desain_id')
+                ->references('id')
+                ->on('desains')
                 ->onDelete('cascade');
 
             $table->foreign('bahan_baku_id')

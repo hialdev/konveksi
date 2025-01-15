@@ -73,10 +73,42 @@
                                 </span>
                             @enderror
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-semibold">Merek Bahan</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text px-6" id="basic-addon1"><i
+                                                class="ti ti-text-caption fs-6"></i></span>
+                                        <input type="text" name="merek" value="{{old('merek', $raw_material->merek)}}" class="form-control ps-2" placeholder="Merek Bahan Baku">
+                                    </div>
+                                    @error('merek')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-semibold">Warna Bahan</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text px-6" id="basic-addon1"><i
+                                                class="ti ti-text-caption fs-6"></i></span>
+                                        <input type="text" name="warna" value="{{old('warna', $raw_material->warna)}}" class="form-control ps-2" placeholder="Warna Bahan Baku">
+                                    </div>
+                                    @error('warna')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
                         <div class="mb-4">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" name="is_available" value="1" type="checkbox" id="is_available" {{ $raw_material->cek_tersedia ? 'checked' : ''}} />
-                                <label class="form-check-label" for="is_available">Jadikan status Bahan Baku (Raw Material) ini tersedia</label>
+                                <label class="form-check-label" for="is_available">Jadikan status Bahan Baku ini tersedia</label>
                             </div>
                         </div>
                         <div class="mb-4">

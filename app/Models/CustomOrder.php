@@ -64,6 +64,10 @@ class CustomOrder extends Model
     public function product(){
         return $this->belongsTo(Product::class, 'produk_id');
     }
+
+    public function desain(){
+        return $this->belongsTo(Desain::class, 'desain_id');
+    }
     
     public function production(){
         return $this->hasOne(RequestProduction::class, 'pesanan_khusus_id');    
@@ -78,5 +82,9 @@ class CustomOrder extends Model
     {
         $totalDibayar = $this->payments()->where('status', '2')->sum('total_dibayar');
         return max($this->total_harga - $totalDibayar, 0);
+    }
+
+    public function retur(){
+        return $this->hasOne(Retur::class, 'pesanan_khusus_id');
     }
 }

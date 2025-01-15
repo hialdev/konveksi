@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-3">
                     <div class="text-center mb-n5">
-                        <img src="../assets/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4" />
+                        <img src="/assets/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4" />
                     </div>
                 </div>
             </div>
@@ -175,6 +175,7 @@
                                         class="ti ti-calendar-event fs-6"></i></span>
                                 <input type="date" name="deadline" class="form-control ps-2" value="{{old('deadline', request()->get('deadline'))}}">
                             </div>
+                            <p class="fs-2 mb-0 mt-1 text-danger">Selesaikan H-2 ({{\Carbon\Carbon::parse(request()->get('deadline'))->format('d-m-Y')}}) dari Deadline Pelanggan {{\Carbon\Carbon::parse(request()->get('deadline'))->addDays(2)->format('d-m-Y')}}</p>
                             @error('deadline')
                                 <span class="invalid-feedback" role="alert">
                                     {{ $message }}
