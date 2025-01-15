@@ -27,6 +27,8 @@ class RawMaterialController extends Controller
         $request->validate([
             'image' => 'required|image|mimes:webp,png,jpg,jpeg,svg|max:2048',
             'name' => 'required|string|min:3',
+            'warna' => 'required|string|min:3',
+            'merek' => 'required|string|min:3',
             'is_available' => 'nullable|boolean',
             'description' => 'nullable|string',
         ]);
@@ -40,6 +42,8 @@ class RawMaterialController extends Controller
             $raw_material = new RawMaterial();
             $raw_material->image = $imagePath;
             $raw_material->nama = $request->get('name');
+            $raw_material->warna = $request->get('warna');
+            $raw_material->merek = $request->get('merek');
             $raw_material->cek_tersedia = $request->get('is_available') ?? 0;
             $raw_material->keterangan = $request->get('description');
             $raw_material->save();
@@ -59,6 +63,8 @@ class RawMaterialController extends Controller
         $request->validate([
             'image' => 'nullable|image|mimes:webp,png,jpg,jpeg,svg|max:2048',
             'name' => 'required|string|min:3',
+            'warna' => 'required|string|min:3',
+            'merek' => 'required|string|min:3',
             'is_available' => 'nullable|boolean',
             'description' => 'nullable|string',
         ]);
@@ -74,6 +80,8 @@ class RawMaterialController extends Controller
             }
 
             $raw_material->nama = $request->get('name');
+            $raw_material->warna = $request->get('warna');
+            $raw_material->merek = $request->get('merek');
             $raw_material->cek_tersedia = $request->get('is_available') ?? 0;
             $raw_material->keterangan = $request->get('description');
             $raw_material->save();

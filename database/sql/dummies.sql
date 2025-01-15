@@ -14,190 +14,449 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Dumping data for table al_konveksi.bahan_baku: ~3 rows (approximately)
-REPLACE INTO `bahan_baku` (`id`, `image`, `nama`, `cek_tersedia`, `keterangan`, `created_at`, `updated_at`) VALUES
-	('828dfb66-c2a3-4d22-affe-199f5a266247', 'raw_materials/pCSJrEXZkWD104kbxjDngXwRxGM27USjW3A5uKED.jpg', 'Raw Material Two', 1, 'Raw material two', '2024-12-27 06:07:30', '2024-12-27 06:07:30'),
-	('878b77f9-13d2-4244-b4a2-17af79f5c478', 'raw_materials/Qe90mpOlABOoNXn310AmW7aPn0oDdj4R81ZiGQGs.jpg', 'Raw Material One', 1, 'raw material one', '2024-12-27 06:07:15', '2024-12-27 06:07:15'),
-	('b004bfa4-8a73-418c-ac66-bc3ae5b25496', 'raw_materials/XEfdhjChetnHQFPS5w0LxYEJnk8KEutyO3BkVdZn.jpg', 'Raw Material Three', 1, 'asdasd', '2024-12-27 07:11:09', '2024-12-27 07:11:09');
+-- Dumping structure for table al_konveksi.bahan_baku
+CREATE TABLE IF NOT EXISTS `bahan_baku` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'e62a280a-20e6-455b-bc78-5aa9ba81c2d4',
+  `image` text COLLATE utf8mb4_unicode_ci,
+  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `merek` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `warna` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cek_tersedia` tinyint(1) NOT NULL DEFAULT '1',
+  `keterangan` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table al_konveksi.banks: ~0 rows (approximately)
-REPLACE INTO `banks` (`id`, `nama_bank`, `logo`, `no_rekening`, `nama_rekening`, `keterangan`, `created_at`, `updated_at`) VALUES
-	('ced2bf6a-0c3c-4d3e-bc09-833eb816ab73', 'Bank Central Asia (BCA)', 'banks/CXU5EgO2Lylzgoy6adrIBZETTlVBYZZ3fmE2ODoe.png', 9871378961, 'Muhammad Nur Alif', NULL, '2025-01-10 14:36:44', '2025-01-10 14:36:44');
+-- Data exporting was unselected.
 
--- Dumping data for table al_konveksi.failed_jobs: ~0 rows (approximately)
+-- Dumping structure for table al_konveksi.banks
+CREATE TABLE IF NOT EXISTS `banks` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '79f36a30-316b-44cd-8d32-bb5df505f896',
+  `nama_bank` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `logo` text COLLATE utf8mb4_unicode_ci,
+  `no_rekening` bigint NOT NULL,
+  `nama_rekening` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keterangan` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table al_konveksi.migrations: ~0 rows (approximately)
-REPLACE INTO `migrations` (`id`, `migration`, `batch`) VALUES
-	(1, '2014_10_12_000000_create_users_table', 1),
-	(2, '2014_10_12_100000_create_password_resets_table', 1),
-	(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-	(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-	(5, '2024_12_23_075457_create_permission_tables', 1),
-	(8, '2024_12_25_032817_raw_materials_table', 1),
-	(9, '2024_12_25_032851_suppliers_table', 1),
-	(10, '2024_12_25_032908_customers_table', 1),
-	(11, '2024_12_25_032918_product_categories_table', 1),
-	(12, '2024_12_25_033045_products_table', 1),
-	(13, '2024_12_25_033045_stocks_table', 1),
-	(14, '2024_12_25_041928_custom_orders_table', 1),
-	(15, '2024_12_25_042700_request_productions_table', 1),
-	(16, '2024_12_25_070245_purchase_raw_materials', 1),
-	(17, '2024_12_25_071220_orders_table', 1),
-	(18, '2024_12_25_072111_custom_order_payments_table', 1),
-	(19, '2024_12_25_072321_reviews_table', 1),
-	(20, '2024_12_25_072336_returs_table', 1),
-	(21, '2024_12_25_074150_settings_table', 1),
-	(22, '2025_01_08_013502_banks', 1);
+-- Data exporting was unselected.
 
--- Dumping data for table al_konveksi.model_has_permissions: ~0 rows (approximately)
+-- Dumping structure for table al_konveksi.desains
+CREATE TABLE IF NOT EXISTS `desains` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint unsigned NOT NULL,
+  `lampiran` text COLLATE utf8mb4_unicode_ci,
+  `nama` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keterangan` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `desains_user_id_foreign` (`user_id`),
+  CONSTRAINT `desains_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table al_konveksi.model_has_roles: ~8 rows (approximately)
-REPLACE INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
-	(1, 'App\\Models\\User', 1),
-	(2, 'App\\Models\\User', 2),
-	(3, 'App\\Models\\User', 3),
-	(3, 'App\\Models\\User', 4),
-	(4, 'App\\Models\\User', 5),
-	(4, 'App\\Models\\User', 6),
-	(4, 'App\\Models\\User', 10),
-	(4, 'App\\Models\\User', 11);
+-- Data exporting was unselected.
 
--- Dumping data for table al_konveksi.password_resets: ~0 rows (approximately)
+-- Dumping structure for table al_konveksi.failed_jobs
+CREATE TABLE IF NOT EXISTS `failed_jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table al_konveksi.pelanggan: ~7 rows (approximately)
-REPLACE INTO `pelanggan` (`id`, `nama`, `email`, `user_id`, `created_at`, `updated_at`) VALUES
-	('2f0067f7-e048-4f3d-bc2a-753f3ceb23d0', 'customer1', 'customer1@gmail.com', 5, '2025-01-10 14:35:12', '2025-01-10 14:35:12'),
-	('433f49e4-29df-4f78-83e3-211c8c16a113', 'Mantap Jiwah', 'hallo@gmail.com', NULL, '2024-12-27 06:50:50', '2024-12-27 06:50:50'),
-	('5eff0ceb-482f-45f7-b219-a2c2735df2ef', 'Mba Limul', 'limul@hiamalif.com', 6, '2025-01-10 14:38:47', '2025-01-10 14:38:47'),
-	('66607b85-6bb4-4796-a102-c267741d1a40', 'Aselole', 'aselole@jklasd.com', 10, '2025-01-12 12:30:50', '2025-01-12 12:30:50'),
-	('7ef34cf2-a746-4ae3-8176-ec51ece9dd4d', 'cobatest123', 'cobatest123@gmail.com', 11, '2025-01-12 14:14:24', '2025-01-12 14:14:24'),
-	('aee0c9c2-31f8-4dd3-b9f6-1dc4a291d577', NULL, 'customer@gmail.com', NULL, '2024-12-27 06:20:42', '2024-12-27 06:20:42'),
-	('daef3c31-57e6-4454-aec7-80a52e2c8de1', NULL, 'wkwk@gmail.com', NULL, '2024-12-27 06:49:36', '2024-12-27 06:49:36');
+-- Data exporting was unselected.
 
--- Dumping data for table al_konveksi.pembayaran_pesanan_khusus: ~4 rows (approximately)
-REPLACE INTO `pembayaran_pesanan_khusus` (`id`, `pesanan_khusus_id`, `bukti_pembayaran`, `total_dibayar`, `status`, `created_at`, `updated_at`) VALUES
-	('26aaf949-724e-42d7-bd00-4fff914c547e', 'd787e3e9-993d-46fb-ab97-3f8388a1caa1', 'custom_orders/pay/Hb9fph1v7FXByJMLjZJ4HuNVgjdrlqR1dGQQd6oR.webp', 12500000, '2', '2025-01-12 11:31:46', '2025-01-12 11:36:48'),
-	('3e534f93-2298-4b3e-982d-4c17ec6ce522', 'd787e3e9-993d-46fb-ab97-3f8388a1caa1', 'custom_orders/pay/HEyX78OZhUegzrCdeegWPiH3Y7MaLFrzQbgq5SkF.webp', 312232, '2', '2025-01-12 09:10:23', '2025-01-12 11:16:51'),
-	('8a3952a2-70dc-4e98-859e-807965384161', 'd787e3e9-993d-46fb-ab97-3f8388a1caa1', 'custom_orders/pay/WRQ5PFsl0Pux8sYTmdIVudetVbFHrKUR4BuNUtBG.png', 42172322, '2', '2025-01-12 09:10:52', '2025-01-12 11:19:23'),
-	('c2088bdd-dc84-4c14-ac40-c5a55bee22cc', 'd787e3e9-993d-46fb-ab97-3f8388a1caa1', 'custom_orders/pay/Txdq4WzHE33FjtV7ImSss6hsGuJLb7eGxTruuHSM.webp', 15446, '2', '2025-01-12 11:32:25', '2025-01-12 11:53:52');
+-- Dumping structure for table al_konveksi.migrations
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table al_konveksi.pembelian_bahan_baku: ~0 rows (approximately)
+-- Data exporting was unselected.
 
--- Dumping data for table al_konveksi.pengajuan_produksi: ~2 rows (approximately)
-REPLACE INTO `pengajuan_produksi` (`id`, `user_id`, `bahan_baku_id`, `produk_id`, `code`, `keterangan`, `qty`, `deadline`, `lampiran`, `status`, `cek_pesanan_khusus`, `pesanan_khusus_id`, `created_at`, `updated_at`) VALUES
-	('6c1f4211-ece0-42cd-8580-a6742ddf837f', 1, 'b004bfa4-8a73-418c-ac66-bc3ae5b25496', 'f0b827eb-7db2-49a6-bdb8-f8703543f4b8', 'REQP/002/BRC/I/25', 'Cepat ya', 753, '2025-01-31', 'request_productions/LQ7IKd5BHJR9mWEEu8Wl1DtF4hUOtuGCRyIgN5m5.jpg', '2', 0, NULL, '2025-01-12 16:13:17', '2025-01-12 16:13:43'),
-	('ca3860c4-a35d-49e6-8a53-c9019380825f', 2, 'b004bfa4-8a73-418c-ac66-bc3ae5b25496', 'f5ac43b3-3594-4c2b-9b6d-cfe81aeef823', 'REQP/001/BRC/I/25', 'Gamisno italiano', 42131, '2025-03-08', 'request_productions/JLYY3wfWthwqgY0yGrYakWIWL3XMu8D5ooqkcfsW.png', '0', 1, 'd787e3e9-993d-46fb-ab97-3f8388a1caa1', '2025-01-12 06:14:13', '2025-01-12 06:14:13');
+-- Dumping structure for table al_konveksi.model_has_permissions
+CREATE TABLE IF NOT EXISTS `model_has_permissions` (
+  `permission_id` bigint unsigned NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint unsigned NOT NULL,
+  PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
+  KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`),
+  CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table al_konveksi.pengembalian: ~2 rows (approximately)
-REPLACE INTO `pengembalian` (`id`, `pesanan_id`, `user_id`, `pesanan_khusus_id`, `status`, `keterangan`, `lampiran_aksi`, `keterangan_aksi`, `aksi_timestamp`, `cek_pesanan_khusus`, `created_at`, `updated_at`) VALUES
-	('11879434-1bcf-45e8-bf88-b5a7eb67901e', 'bcc609ce-d114-4922-aebe-d49062376140', 6, NULL, '1', 'Kekecilan', 'orders/returs/AGRDiHn8qsllioUI8hBGNaOfgAZlfGxbVANj03Rc.png', 'Barang sudah robek', '2025-01-11 14:10:33', NULL, '2025-01-11 14:05:59', '2025-01-11 14:10:33'),
-	('7733b582-1ebc-4c43-9e31-b933fe34b271', 'cf65562f-b25c-4491-a5ca-69c97e310829', 5, NULL, '2', 'Salah dalam warna dan ukuran', 'orders/returs/9WWeMLDlBd7zeJil5nsMADdWUMkEWkRqcJ1GBGdT.png', NULL, '2025-01-11 13:11:23', NULL, '2025-01-11 03:45:32', '2025-01-11 13:11:23'),
-	('8cab893e-67f3-4a6c-aefa-e727d4b06413', '09c0964b-d7af-42fe-a15a-425e3cc449c4', 6, NULL, '2', 'kurang 6 pcs', 'orders/returs/kqzDvOd4Bmrb8L3q2negSdUfLOr4RWiXY6stp4Wn.webp', 'asdasd', '2025-01-12 17:25:03', NULL, '2025-01-12 17:21:04', '2025-01-12 17:25:03'),
-	('a35e1257-f350-4cf9-9573-5f107d05156f', NULL, 6, 'd787e3e9-993d-46fb-ab97-3f8388a1caa1', '2', 'Bahannya robek', 'orders/returs/bYd7tg7PJe0ig2MT13ZQ6Iyyzk7ymZX7doCALM8X.png', 'Sudah ditangani dengan refund 10% dari transaksi', '2025-01-13 10:17:41', 1, '2025-01-13 10:05:44', '2025-01-13 10:17:41');
+-- Data exporting was unselected.
 
--- Dumping data for table al_konveksi.permissions: ~0 rows (approximately)
+-- Dumping structure for table al_konveksi.model_has_roles
+CREATE TABLE IF NOT EXISTS `model_has_roles` (
+  `role_id` bigint unsigned NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint unsigned NOT NULL,
+  PRIMARY KEY (`role_id`,`model_id`,`model_type`),
+  KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`),
+  CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table al_konveksi.personal_access_tokens: ~0 rows (approximately)
+-- Data exporting was unselected.
 
--- Dumping data for table al_konveksi.pesanan: ~11 rows (approximately)
-REPLACE INTO `pesanan` (`id`, `user_id`, `code`, `status`, `produk`, `bukti_pembayaran`, `total_harga`, `created_at`, `updated_at`) VALUES
-	('09c0964b-d7af-42fe-a15a-425e3cc449c4', 6, 'ORDER/008/BRC/I/25', '4', '{"68f76269-038a-4cc0-8951-540bc7713818": {"id": "68f76269-038a-4cc0-8951-540bc7713818", "qty": 1}, "bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 2}, "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823": {"id": "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823", "qty": 1}}', 'orders/TarLcGpWGwZLW9phlWFu3M8Trp0JkxUO2i4TJ2VY.png', 132887, '2025-01-12 12:04:58', '2025-01-12 17:25:03'),
-	('09d8ca5d-2b66-425a-84cf-83355813c921', 1, 'ORDER/004/BRC/I/25', '4', '{"68f76269-038a-4cc0-8951-540bc7713818": {"id": "68f76269-038a-4cc0-8951-540bc7713818", "qty": 3}, "bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 2}, "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823": {"id": "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823", "qty": 1}}', 'orders/SDqtsoS8yoLsCkJ06x9iXobTZYFnEedcWdLMR3oC.png', 184218, '2025-01-10 14:39:02', '2025-01-10 15:08:53'),
-	('0b68c14c-843a-4c9e-bc12-e12a8e06f6f0', 5, 'ORDER/011/BRC/I/25', '2', '{"68f76269-038a-4cc0-8951-540bc7713818": {"id": "68f76269-038a-4cc0-8951-540bc7713818", "qty": 1}, "bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 4}, "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823": {"id": "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823", "qty": 1}}', 'orders/Bc1yGFxDJaPgwVcixK88sYda2wnvHUFfMDJuBuQ6.png', 181998, '2025-01-12 16:03:57', '2025-01-12 16:04:51'),
-	('19bb1569-b79b-40bc-82ff-ac45628fc724', 6, 'ORDER/012/BRC/I/25', '2', '{"68f76269-038a-4cc0-8951-540bc7713818": {"id": "68f76269-038a-4cc0-8951-540bc7713818", "qty": 15}}', 'orders/aI515QSpZmUFru7sY8OtB5llTcTTQpTsHtmNBp3r.png', 384981, '2025-01-12 16:07:56', '2025-01-12 16:08:24'),
-	('19e15a41-863b-471a-905a-a96d351c5ac2', 1, 'ORDER/010/BRC/I/25', '2', '{"68f76269-038a-4cc0-8951-540bc7713818": {"id": "68f76269-038a-4cc0-8951-540bc7713818", "qty": 6}}', 'orders/n8HDEOeUo9nStkaygsqAmWHl1lkXBMJAebPZE8O0.png', 153993, '2025-01-12 16:00:28', '2025-01-12 16:02:31'),
-	('37260163-dc67-4ce8-8882-08c2f96a3e55', 5, 'ORDER/003/BRC/I/25', '3', '{"68f76269-038a-4cc0-8951-540bc7713818": {"id": "68f76269-038a-4cc0-8951-540bc7713818", "qty": 2}, "bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 1}, "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823": {"id": "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823", "qty": 2}}', 'orders/H4Sflj62vc185IXGAcsSPuBIMD5g24Dfw4HtGycl.png', 192108, '2025-01-10 14:37:31', '2025-01-10 15:09:18'),
-	('3c57bf14-9e33-4d82-b09f-b2288aa66d56', 6, 'ORDER/014/BRC/I/25', '0', '{"68f76269-038a-4cc0-8951-540bc7713818": {"id": "68f76269-038a-4cc0-8951-540bc7713818", "qty": 52}, "bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 23}, "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823": {"id": "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823", "qty": 71}}', NULL, 6025238, '2025-01-13 11:08:46', '2025-01-13 11:08:46'),
-	('4604558e-671c-4419-b5c7-540c86162418', 5, 'ORDER/002/BRC/I/25', '4', '{"bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 1}, "f0b827eb-7db2-49a6-bdb8-f8703543f4b8": {"id": "f0b827eb-7db2-49a6-bdb8-f8703543f4b8", "qty": 1}}', 'orders/6DGshTlBUVvPL0RblSsCtDJ95lZ5C7mMeJ3l6ipm.webp', 133692, '2025-01-10 14:37:10', '2025-01-10 15:24:06'),
-	('4e5fc415-40e4-4d41-9430-c9d4c26d7c7f', 6, 'ORDER/015/BRC/I/25', '0', '{"68f76269-038a-4cc0-8951-540bc7713818": {"id": "68f76269-038a-4cc0-8951-540bc7713818", "qty": 200}, "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823": {"id": "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823", "qty": 59}}', NULL, 8561616, '2025-01-13 11:10:16', '2025-01-13 11:10:16'),
-	('6a623ec9-be80-49db-bab6-5692392a6f65', 6, 'ORDER/013/BRC/I/25', '2', '{"f5ac43b3-3594-4c2b-9b6d-cfe81aeef823": {"id": "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823", "qty": 4}}', 'orders/hCWRZetqnW2XzqKzznZyzrFEo6fNWLdyd8C5957Z.png', 232443, '2025-01-12 16:40:41', '2025-01-12 16:41:30'),
-	('bcc609ce-d114-4922-aebe-d49062376140', 6, 'ORDER/007/BRC/I/25', '4', '{"68f76269-038a-4cc0-8951-540bc7713818": {"id": "68f76269-038a-4cc0-8951-540bc7713818", "qty": 1}, "bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 1}, "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823": {"id": "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823", "qty": 1}}', 'orders/vq5i8e7tGyQmv77zsGL39Q0QEGoRp21OoFe9C4Bp.png', 108332, '2025-01-11 14:05:02', '2025-01-11 14:10:33'),
-	('cf65562f-b25c-4491-a5ca-69c97e310829', 5, 'ORDER/005/BRC/I/25', '4', '{"68f76269-038a-4cc0-8951-540bc7713818": {"id": "68f76269-038a-4cc0-8951-540bc7713818", "qty": 1}, "bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 1}}', 'orders/rJBSayqiIHi4Er1RQRLAL9nKT74rWgNM6gmERd7y.webp', 50221, '2025-01-10 14:40:23', '2025-01-11 13:11:23'),
-	('eb679215-4975-4705-a243-b804d34a75e5', 6, 'ORDER/006/BRC/I/25', '4', '{"bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 1}, "f0b827eb-7db2-49a6-bdb8-f8703543f4b8": {"id": "f0b827eb-7db2-49a6-bdb8-f8703543f4b8", "qty": 1}, "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823": {"id": "f5ac43b3-3594-4c2b-9b6d-cfe81aeef823", "qty": 1}}', 'orders/PsaT9ma1v6CITiNmCOYj3t2VvHenvifhCQ2ydFaf.png', 191802, '2025-01-10 14:50:16', '2025-01-10 15:08:38'),
-	('f84b140c-af0d-4e6c-a36c-383b014d1a7f', 6, 'ORDER/009/BRC/I/25', '2', '{"68f76269-038a-4cc0-8951-540bc7713818": {"id": "68f76269-038a-4cc0-8951-540bc7713818", "qty": 1}, "bf1c342f-2cc3-43f6-9394-6facc635022b": {"id": "bf1c342f-2cc3-43f6-9394-6facc635022b", "qty": 1}, "f0b827eb-7db2-49a6-bdb8-f8703543f4b8": {"id": "f0b827eb-7db2-49a6-bdb8-f8703543f4b8", "qty": 3}}', 'orders/igAP3IpaWcQVLK8RDRdLM1h7x0C0gnOuH5XnbrHS.png', 377630, '2025-01-12 12:13:49', '2025-01-12 12:16:25');
+-- Dumping structure for table al_konveksi.password_resets
+CREATE TABLE IF NOT EXISTS `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table al_konveksi.pesanan_khusus: ~3 rows (approximately)
-REPLACE INTO `pesanan_khusus` (`id`, `code`, `user_id`, `bahan_baku_id`, `produk_id`, `cek_bahan_dari_pelanggan`, `lampiran_bahan`, `nama_bahan`, `keterangan_bahan`, `deadline`, `qty`, `total_harga`, `status`, `status_pembayaran`, `keterangan_konveksi`, `keterangan_pelanggan`, `created_at`, `updated_at`) VALUES
-	('9afe39ee-4b59-46ad-b386-6eb32b01f76f', 'CUSTOM/002/BRC/I/25', 6, 'b004bfa4-8a73-418c-ac66-bc3ae5b25496', 'f5ac43b3-3594-4c2b-9b6d-cfe81aeef823', 0, NULL, NULL, NULL, '2025-02-06', 2344, 891223222, '3', '0', 'All in, kecuali pengiriman', NULL, '2025-01-11 14:58:51', '2025-01-12 05:28:50'),
-	('cf85c1ff-7735-4e34-8b2e-e7880acdc8d5', 'CUSTOM/004/BRC/I/25', 6, NULL, 'f0b827eb-7db2-49a6-bdb8-f8703543f4b8', 1, 'custom_orders/raw/XpAm9G2r1g4a7QVMV3ycP5mM9sZOT84Nym4lZTsB.pdf', 'Cobba Baru Ah', 'Apayah yang neak', '2025-02-20', 5213, 312312122, '4', '0', NULL, NULL, '2025-01-11 17:03:59', '2025-01-11 19:25:23'),
-	('d787e3e9-993d-46fb-ab97-3f8388a1caa1', 'CUSTOM/003/BRC/I/25', 6, NULL, 'f5ac43b3-3594-4c2b-9b6d-cfe81aeef823', 1, 'custom_orders/raw/WyyvIDxHTyBUCgnRoGf9YE1dytpOolZUedN7jsfh.png', 'Bahan Baku Nih', 'Bahan premium nih dair itali', '2025-03-08', 42131, 55000000, '5', '0', 'Ya, baik bisa namun diluar pengemasan', 'Saya ingin menjadikannya 55jt saja bagaimana', '2025-01-11 16:58:25', '2025-01-13 10:17:41');
+-- Data exporting was unselected.
 
--- Dumping data for table al_konveksi.produk: ~4 rows (approximately)
-REPLACE INTO `produk` (`id`, `produk_kategori_id`, `image`, `nama`, `slug`, `keterangan`, `harga`, `created_at`, `updated_at`) VALUES
-	('68f76269-038a-4cc0-8951-540bc7713818', 1, 'products/lAOHfDAOrPaCCEaAzzqpyOXT45K6gaUSzVJKG5yA.jpg', 'Gamis Two', 'gamis-two', '', 23122, '2024-12-27 07:09:38', '2024-12-27 07:09:38'),
-	('bf1c342f-2cc3-43f6-9394-6facc635022b', 2, 'products/KDsGHqEioe0lvhoo6DEE9hhwB48uk9ouJYGTiQfW.jpg', 'Jersey Two', 'jersey-two', '', 22122, '2024-12-27 07:08:47', '2024-12-27 07:08:47'),
-	('f0b827eb-7db2-49a6-bdb8-f8703543f4b8', 2, 'products/REXvMjXSxHaKtcvCNldBiE3rYopL6Z0kMmAchLbD.jpg', 'Jersey One', 'jersey-one', '', 98321, '2024-12-27 07:08:25', '2024-12-27 07:08:25'),
-	('f5ac43b3-3594-4c2b-9b6d-cfe81aeef823', 1, 'products/BgAuRCHcHkmoTecRIN1HlMoXlJvA99gVlouUlRNs.jpg', 'Gamis One', 'gamis-one', '', 52352, '2024-12-27 07:09:14', '2024-12-27 07:09:14');
+-- Dumping structure for table al_konveksi.pelanggan
+CREATE TABLE IF NOT EXISTS `pelanggan` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0b7d5a78-d67c-4f0b-beb9-5f91d4d0ff63',
+  `nama` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint unsigned DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pelanggan_user_id_foreign` (`user_id`),
+  CONSTRAINT `pelanggan_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table al_konveksi.produk_kategori: ~2 rows (approximately)
-REPLACE INTO `produk_kategori` (`id`, `nama`, `created_at`, `updated_at`) VALUES
-	(1, 'Gamis', '2024-12-27 07:07:02', '2024-12-27 07:07:02'),
-	(2, 'Jersey', '2024-12-27 07:07:50', '2024-12-27 07:07:50');
+-- Data exporting was unselected.
 
--- Dumping data for table al_konveksi.roles: ~4 rows (approximately)
-REPLACE INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-	(1, 'developer', 'web', '2025-01-10 14:30:30', '2025-01-10 14:30:30'),
-	(2, 'admin', 'web', '2025-01-10 14:30:30', '2025-01-10 14:30:30'),
-	(3, 'employee', 'web', '2025-01-10 14:30:30', '2025-01-10 14:30:30'),
-	(4, 'pelanggan', 'web', '2025-01-10 14:30:30', '2025-01-10 14:30:30');
+-- Dumping structure for table al_konveksi.pembayaran_pesanan_khusus
+CREATE TABLE IF NOT EXISTS `pembayaran_pesanan_khusus` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '2e351f03-d6d0-432c-a56d-0d5f4f008bb8',
+  `pesanan_khusus_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bukti_pembayaran` text COLLATE utf8mb4_unicode_ci,
+  `total_dibayar` int NOT NULL DEFAULT '0',
+  `status` enum('0','1','2') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pembayaran_pesanan_khusus_pesanan_khusus_id_foreign` (`pesanan_khusus_id`),
+  CONSTRAINT `pembayaran_pesanan_khusus_pesanan_khusus_id_foreign` FOREIGN KEY (`pesanan_khusus_id`) REFERENCES `pesanan_khusus` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table al_konveksi.role_has_permissions: ~0 rows (approximately)
+-- Data exporting was unselected.
 
--- Dumping data for table al_konveksi.settings: ~14 rows (approximately)
-REPLACE INTO `settings` (`id`, `group`, `group_key`, `name`, `key`, `description`, `input_type`, `value`, `is_urgent`, `created_at`, `updated_at`) VALUES
-	('0dce868d-08f8-4c65-8904-3636ae2af53d', 'Site', 'site', 'Logo', 'logo', 'Logo untuk website', 'image', 'settings/zueml9h4JGBWjyL4dOz9jo6P7dIGQbRGWZ6kVQiR.jpg', 1, '2024-12-25 21:05:21', '2024-12-25 21:05:31'),
-	('1626205a-3961-4cb4-a1aa-ad3ab5720eeb', 'Site', 'site', 'Favicon', 'favicon', 'Upload gambar dengan rasio 1:1', 'image', 'settings/aaZ8I0TOvMRSHSpDXKVbNs7vpCq55bcEslyF9ueT.jpg', 1, '2024-12-25 21:05:54', '2024-12-25 21:06:02'),
-	('239f1c78-7d44-42c2-8f10-f678396c5e9d', 'Theme', 'theme', 'Button Border Color', 'btn-border', 'Nilai Default \'#926e38\'', 'text', '#212121', 1, '2024-12-26 05:17:30', '2024-12-26 05:21:52'),
-	('40aa2835-2e30-451f-bcb8-6fc4f5a29559', 'Theme', 'theme', 'Background Subtle', 'bg-subtle', 'Nilai default \'#926e380c\'', 'text', NULL, 1, '2024-12-26 05:16:10', '2024-12-26 05:16:10'),
-	('6d6de589-6acd-437b-b86a-7f8074ae667d', 'Theme', 'theme', 'Button Hover Background', 'btn-hover-bg', 'Nilai default \'#a47d42\'', 'text', NULL, 1, '2024-12-26 05:18:02', '2024-12-26 05:18:02'),
-	('8e5d7803-d425-4e13-a645-dea51a9362f9', 'Theme', 'theme', 'Button Background', 'btn-bg', 'Nilai Default #926e38', 'text', '#212121', 1, '2024-12-26 05:16:58', '2024-12-26 05:21:42'),
-	('9212cb81-6357-4382-ad09-2f9c6b0b9e2b', 'Site', 'site', 'Dashboard - Paragraf', 'dashboard-paragraf', 'Paragraf pada header dashboard', 'text', 'Lihat etalase kita untuk mengetahui product yang ready stock, atau buat pesanan khusus (Custom Order) sesuai kemauan kamu!', 1, '2024-12-25 21:07:17', '2024-12-25 21:09:24'),
-	('930d264f-66b0-4b7e-b0fa-8cecac392c7d', 'Theme', 'theme', 'Primary RGBA', 'primary-rgba', 'Nilai default \'163, 118, 78\'', 'text', NULL, 1, '2024-12-26 05:15:33', '2024-12-26 05:15:33'),
-	('97de4ca9-788f-445e-8c92-3bcf62374fef', 'Site', 'site', 'Dashboard - Button Link', 'dashboard-button-link', 'Link untuk tombol pada header dashboard', 'text', '/custom-order/offer', 1, '2024-12-25 21:08:00', '2024-12-25 21:09:30'),
-	('b2786502-1224-46fd-9062-2de265aa07aa', 'Site', 'site', 'Dashboard - Button Text', 'dashboard-button-text', 'Text untuk tombol pada header dashboard', 'text', 'Custom Order', 1, '2024-12-25 21:07:36', '2024-12-25 21:09:36'),
-	('cbe5cd7b-c416-4818-aa54-907d75415104', 'Theme', 'theme', 'Button Hover Border', 'btn-hover-border', 'Nilai default \'#a47d42\'', 'text', NULL, 1, '2024-12-26 05:18:28', '2024-12-26 05:18:28'),
-	('cf966a94-8ba8-47b6-89d7-f8eac3636e54', 'Site', 'site', 'Dashboard - Greeting', 'dashboard-greeting', 'Title ucapan pada header dashboard', 'text', 'Masukan nilai PPN, contoh 11 untuk PPN 11%', 1, '2024-12-25 21:06:51', '2024-12-25 21:09:55'),
-	('e2786502-1344-46fd-7062-2de265ba15aa', 'Site', 'site', 'PPN %', 'ppn', 'Nilai PPN, contoh 11 untuk PPN 11%', 'number', '11', 1, '2024-12-25 21:07:36', '2024-12-25 21:09:36'),
-	('ed186bd9-6cad-471e-97c6-6c8660c51375', 'Theme', 'theme', 'Primary Color', 'primary-color', 'Nilai default #926e38', 'text', '#212121', 1, '2024-12-26 05:15:02', '2024-12-26 05:24:26');
+-- Dumping structure for table al_konveksi.pembelian_bahan_baku
+CREATE TABLE IF NOT EXISTS `pembelian_bahan_baku` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '8b655877-0327-437b-be96-42bb03d2c7d2',
+  `supplier_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint unsigned NOT NULL,
+  `bahan_baku_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tgl_pembelian` date NOT NULL DEFAULT '2025-01-14',
+  `keterangan` text COLLATE utf8mb4_unicode_ci,
+  `file_bukti` text COLLATE utf8mb4_unicode_ci,
+  `total_harga_beli` int NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pembelian_bahan_baku_code_unique` (`code`),
+  KEY `pembelian_bahan_baku_supplier_id_foreign` (`supplier_id`),
+  KEY `pembelian_bahan_baku_user_id_foreign` (`user_id`),
+  KEY `pembelian_bahan_baku_bahan_baku_id_foreign` (`bahan_baku_id`),
+  CONSTRAINT `pembelian_bahan_baku_bahan_baku_id_foreign` FOREIGN KEY (`bahan_baku_id`) REFERENCES `bahan_baku` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `pembelian_bahan_baku_supplier_id_foreign` FOREIGN KEY (`supplier_id`) REFERENCES `suppliers` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `pembelian_bahan_baku_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table al_konveksi.stok: ~4 rows (approximately)
-REPLACE INTO `stok` (`id`, `produk_id`, `stok`, `created_at`, `updated_at`) VALUES
-	('12e67fda-74bd-43af-9a46-a96b1f476033', 'bf1c342f-2cc3-43f6-9394-6facc635022b', 200, '2024-12-27 07:08:47', '2024-12-27 07:08:47'),
-	('20d208ee-a1a1-4dd4-8a74-1887adcaf7c9', 'f0b827eb-7db2-49a6-bdb8-f8703543f4b8', 2006, '2024-12-27 07:08:25', '2025-01-12 16:13:43'),
-	('a483c27e-6de2-42e4-a810-684c48d9a9bf', 'f5ac43b3-3594-4c2b-9b6d-cfe81aeef823', 346, '2024-12-27 07:09:14', '2025-01-12 16:41:30'),
-	('f2af2a74-2355-41bd-94f6-fc3ed9b6dfa5', '68f76269-038a-4cc0-8951-540bc7713818', 207, '2024-12-27 07:09:38', '2025-01-12 16:08:24');
+-- Data exporting was unselected.
 
--- Dumping data for table al_konveksi.suppliers: ~4 rows (approximately)
-REPLACE INTO `suppliers` (`id`, `nama`, `email`, `keterangan`, `created_at`, `updated_at`) VALUES
-	('1ecfd3de-dc25-4ed1-8d33-ffcc124f1bbe', 'PT Underwear Invisible', 'look@underwear.id', 'Supplier bahan pakaian dalam', '2024-12-27 07:00:03', '2024-12-27 07:00:03'),
-	('c36780fe-4464-47cc-b11a-12f6e32b43b3', 'PT AL Sport International', 'contact@alsport.com', 'Supplier bahan baju jersey', '2024-12-27 06:59:19', '2024-12-27 06:59:19'),
-	('ec11d038-0fd2-4fda-8bf4-61c6b0ccd335', 'PT Serba Ada', 'hi@serbaada.com', 'Supplier bahan bahan terbesar di indonesia', '2024-12-27 07:00:54', '2024-12-27 07:00:54'),
-	('f6d75c8f-6dca-41fe-8266-181a95790f3d', 'Aleeyah Collection', 'inc@aleeyah.com', 'Supplier bahan bahan gamis', '2024-12-27 06:58:35', '2024-12-27 06:58:35');
+-- Dumping structure for table al_konveksi.pengajuan_produksi
+CREATE TABLE IF NOT EXISTS `pengajuan_produksi` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '5ed006dc-9df1-4dde-b38c-dae9c9052dfc',
+  `user_id` bigint unsigned NOT NULL,
+  `bahan_baku_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `produk_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keterangan` text COLLATE utf8mb4_unicode_ci,
+  `qty` int NOT NULL DEFAULT '0',
+  `deadline` date NOT NULL,
+  `lampiran` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('0','1','2') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cek_pesanan_khusus` tinyint(1) NOT NULL DEFAULT '0',
+  `pesanan_khusus_id` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pengajuan_produksi_code_unique` (`code`),
+  KEY `pengajuan_produksi_user_id_foreign` (`user_id`),
+  KEY `pengajuan_produksi_bahan_baku_id_foreign` (`bahan_baku_id`),
+  KEY `pengajuan_produksi_produk_id_foreign` (`produk_id`),
+  KEY `pengajuan_produksi_pesanan_khusus_id_foreign` (`pesanan_khusus_id`),
+  CONSTRAINT `pengajuan_produksi_bahan_baku_id_foreign` FOREIGN KEY (`bahan_baku_id`) REFERENCES `bahan_baku` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `pengajuan_produksi_pesanan_khusus_id_foreign` FOREIGN KEY (`pesanan_khusus_id`) REFERENCES `pesanan_khusus` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `pengajuan_produksi_produk_id_foreign` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `pengajuan_produksi_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table al_konveksi.ulasan: ~8 rows (approximately)
-REPLACE INTO `ulasan` (`id`, `pesanan_id`, `produk_id`, `user_id`, `pesanan_khusus_id`, `rating`, `keterangan`, `cek_pesanan_khusus`, `created_at`, `updated_at`) VALUES
-	('32c4e433-28c6-4c97-a50f-02fa0d99e28a', 'eb679215-4975-4705-a243-b804d34a75e5', 'bf1c342f-2cc3-43f6-9394-6facc635022b', 6, NULL, 5, 'Bagus semuanya, puas', NULL, '2025-01-11 02:55:17', '2025-01-11 02:55:17'),
-	('4722d929-04dd-4a71-b56a-fb9f97ba89ad', '4604558e-671c-4419-b5c7-540c86162418', 'bf1c342f-2cc3-43f6-9394-6facc635022b', 5, NULL, 5, 'Bagus sesuai ekspetasi', NULL, '2025-01-11 03:47:08', '2025-01-11 03:47:08'),
-	('6107c126-98d1-4504-92c0-fb76f3cd050a', '09d8ca5d-2b66-425a-84cf-83355813c921', 'bf1c342f-2cc3-43f6-9394-6facc635022b', 1, NULL, 4, 'Sangat bagus saya suka sekali', NULL, '2025-01-10 19:24:26', '2025-01-10 19:24:26'),
-	('768e74a0-4728-4208-80c7-bf5039069827', '4604558e-671c-4419-b5c7-540c86162418', 'f0b827eb-7db2-49a6-bdb8-f8703543f4b8', 5, NULL, 5, 'Bagus sesuai ekspetasi', NULL, '2025-01-11 03:47:08', '2025-01-11 03:47:08'),
-	('82e90577-c096-4e98-9470-8a02cd6cfd16', 'eb679215-4975-4705-a243-b804d34a75e5', 'f5ac43b3-3594-4c2b-9b6d-cfe81aeef823', 6, NULL, 5, 'Bagus semuanya, puas', NULL, '2025-01-11 02:55:17', '2025-01-11 02:55:17'),
-	('b177d419-4476-4d96-9aaa-6fdbb81c5004', '09d8ca5d-2b66-425a-84cf-83355813c921', 'f5ac43b3-3594-4c2b-9b6d-cfe81aeef823', 1, NULL, 5, 'Sangat bagus saya suka sekali', NULL, '2025-01-10 19:24:26', '2025-01-10 19:24:26'),
-	('cba33860-92bc-47f8-8413-290bc16591bd', '09d8ca5d-2b66-425a-84cf-83355813c921', '68f76269-038a-4cc0-8951-540bc7713818', 1, NULL, 5, 'Sangat bagus saya suka sekali', NULL, '2025-01-10 19:24:26', '2025-01-10 19:24:26'),
-	('ef35b34a-e016-4947-adcf-b3fc38f32251', 'eb679215-4975-4705-a243-b804d34a75e5', 'f0b827eb-7db2-49a6-bdb8-f8703543f4b8', 6, NULL, 4, 'Bagus semuanya, puas', NULL, '2025-01-11 02:55:17', '2025-01-11 02:55:17');
+-- Data exporting was unselected.
 
--- Dumping data for table al_konveksi.users: ~11 rows (approximately)
-REPLACE INTO `users` (`id`, `image`, `name`, `email`, `phone`, `position`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(1, NULL, 'AL Developer', 'al@hiamalif.com', NULL, NULL, NULL, '$2y$10$GTn.6HirjG02FJHDjlyU2uTbucjfC7bbI8PT0s9oYPExnIltBLD62', NULL, '2025-01-10 14:30:30', '2025-01-10 14:30:30'),
-	(2, NULL, 'Admin User', 'admin@example.com', NULL, NULL, NULL, '$2y$10$v8eATzUkoRFIQuBOp4RUiuIiIxExPupeq.U33pyIfKk5/GJmGYKVa', NULL, '2025-01-10 14:30:30', '2025-01-10 14:30:30'),
-	(3, NULL, 'Employee User 1', 'employee1@example.com', NULL, NULL, NULL, '$2y$10$rk.V8x9vV0WOolfW7enwtexm7ahr9qVChcMZkHBxNRHT44BILU5jG', NULL, '2025-01-10 14:30:30', '2025-01-10 14:30:30'),
-	(4, NULL, 'Employee User 2', 'employee2@example.com', NULL, NULL, NULL, '$2y$10$HeeYURV9jiKBztqtbqP/WOz1ft.fAk1ZpaFClIBz4SPbb/Ja7ULLq', NULL, '2025-01-10 14:30:30', '2025-01-10 14:30:30'),
-	(5, NULL, 'customer1', 'customer1@gmail.com', NULL, NULL, NULL, '$2y$10$3LE6gg61qPk.rCWdm6BmveOc5FA.VPs6ef5zBkyBEqq056qKpVzkG', NULL, '2025-01-10 14:35:12', '2025-01-10 14:35:12'),
-	(6, NULL, 'Mba Limul', 'limul@hiamalif.com', NULL, NULL, NULL, '$2y$10$QEAKk9lB8I4XVdzEBqRpVua50xu8NsDiS342rSEuDK3TnlTL.wmvS', NULL, '2025-01-10 14:38:47', '2025-01-10 14:38:47'),
-	(7, NULL, 'Abdul', 'abdul@gmail.com', NULL, NULL, NULL, '$2y$10$Uhnijzj1WTMP.IosVjvsbeTMQkxCyO55BB6j5u7Kld7pIPC/vUvFG', NULL, '2025-01-12 12:19:10', '2025-01-12 12:19:10'),
-	(8, NULL, 'mnuralif63', 'mnuralif63@gmail.com', NULL, NULL, NULL, '$2y$10$uWk8EjrEzwgjx3PCuILikukOKFQN6ECUvh7xIXd135xCaSO3pST/2', NULL, '2025-01-12 12:20:46', '2025-01-12 12:20:46'),
-	(9, NULL, 'Satriyo Manjalito', 'satriyo@gmail.com', NULL, NULL, NULL, '$2y$10$xwvAYDVJUbJSsMeSdP3Zv.JwLrAIFfVEZphdWXDS484W5kFyvcLRu', NULL, '2025-01-12 12:25:50', '2025-01-12 12:25:50'),
-	(10, NULL, 'Aselole', 'aselole@jklasd.com', NULL, NULL, NULL, '$2y$10$n8fExb.q6H4w.qjs8MOFGe4wCJZ68EOgvBI9J5e8/7N5/2WDuXqyi', NULL, '2025-01-12 12:30:50', '2025-01-12 12:30:50'),
-	(11, NULL, 'cobatest123', 'cobatest123@gmail.com', NULL, NULL, NULL, '$2y$10$JtIRaYH60wTu71yJFyK/g.f/8OfIe4J1tKFeGAUPoOMS7qs5.E.JW', NULL, '2025-01-12 14:14:24', '2025-01-12 14:14:24');
+-- Dumping structure for table al_konveksi.pengembalian
+CREATE TABLE IF NOT EXISTS `pengembalian` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '71847f07-1929-454c-ae88-38af94387653',
+  `pesanan_id` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` bigint unsigned NOT NULL,
+  `pesanan_khusus_id` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('0','1','2') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `keterangan` text COLLATE utf8mb4_unicode_ci,
+  `lampiran_aksi` text COLLATE utf8mb4_unicode_ci,
+  `keterangan_aksi` text COLLATE utf8mb4_unicode_ci,
+  `aksi_timestamp` timestamp NULL DEFAULT NULL,
+  `cek_pesanan_khusus` tinyint(1) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pengembalian_pesanan_id_foreign` (`pesanan_id`),
+  KEY `pengembalian_user_id_foreign` (`user_id`),
+  CONSTRAINT `pengembalian_pesanan_id_foreign` FOREIGN KEY (`pesanan_id`) REFERENCES `pesanan` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `pengembalian_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table al_konveksi.permissions
+CREATE TABLE IF NOT EXISTS `permissions` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table al_konveksi.personal_access_tokens
+CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table al_konveksi.pesanan
+CREATE TABLE IF NOT EXISTS `pesanan` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '72d5efa1-65f3-4915-9070-2d895bb7f3af',
+  `user_id` bigint unsigned NOT NULL,
+  `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('0','1','2','3','4','5') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `produk` json NOT NULL,
+  `bukti_pembayaran` text COLLATE utf8mb4_unicode_ci,
+  `total_harga` int NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pesanan_code_unique` (`code`),
+  KEY `pesanan_user_id_foreign` (`user_id`),
+  CONSTRAINT `pesanan_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table al_konveksi.pesanan_khusus
+CREATE TABLE IF NOT EXISTS `pesanan_khusus` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'b675e581-7e6b-405a-85f9-e964598e1022',
+  `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint unsigned NOT NULL,
+  `bahan_baku_id` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `produk_id` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desain_id` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cek_bahan_dari_pelanggan` tinyint(1) NOT NULL DEFAULT '0',
+  `lampiran_bahan` text COLLATE utf8mb4_unicode_ci,
+  `nama_bahan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keterangan_bahan` text COLLATE utf8mb4_unicode_ci,
+  `deadline` date NOT NULL,
+  `qty` int NOT NULL DEFAULT '0',
+  `total_harga` bigint DEFAULT NULL,
+  `status` enum('0','1','2','3','4','5','6') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `status_pembayaran` enum('0','1','2') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `keterangan_konveksi` text COLLATE utf8mb4_unicode_ci,
+  `keterangan_pelanggan` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pesanan_khusus_code_unique` (`code`),
+  KEY `pesanan_khusus_user_id_foreign` (`user_id`),
+  KEY `pesanan_khusus_desain_id_foreign` (`desain_id`),
+  KEY `pesanan_khusus_bahan_baku_id_foreign` (`bahan_baku_id`),
+  KEY `pesanan_khusus_produk_id_foreign` (`produk_id`),
+  CONSTRAINT `pesanan_khusus_bahan_baku_id_foreign` FOREIGN KEY (`bahan_baku_id`) REFERENCES `bahan_baku` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `pesanan_khusus_desain_id_foreign` FOREIGN KEY (`desain_id`) REFERENCES `desains` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `pesanan_khusus_produk_id_foreign` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `pesanan_khusus_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table al_konveksi.produk
+CREATE TABLE IF NOT EXISTS `produk` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '187649a0-5a57-40f8-a6c0-68d9e56bc6c3',
+  `produk_kategori_id` bigint unsigned NOT NULL,
+  `image` text COLLATE utf8mb4_unicode_ci,
+  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keterangan` text COLLATE utf8mb4_unicode_ci,
+  `harga` int NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `produk_slug_unique` (`slug`),
+  KEY `produk_produk_kategori_id_foreign` (`produk_kategori_id`),
+  CONSTRAINT `produk_produk_kategori_id_foreign` FOREIGN KEY (`produk_kategori_id`) REFERENCES `produk_kategori` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table al_konveksi.produk_kategori
+CREATE TABLE IF NOT EXISTS `produk_kategori` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table al_konveksi.roles
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table al_konveksi.role_has_permissions
+CREATE TABLE IF NOT EXISTS `role_has_permissions` (
+  `permission_id` bigint unsigned NOT NULL,
+  `role_id` bigint unsigned NOT NULL,
+  PRIMARY KEY (`permission_id`,`role_id`),
+  KEY `role_has_permissions_role_id_foreign` (`role_id`),
+  CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table al_konveksi.settings
+CREATE TABLE IF NOT EXISTS `settings` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '4854b9c2-bde8-4e5e-a6d6-442f4c8513cb',
+  `group` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `group_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `input_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'text',
+  `value` text COLLATE utf8mb4_unicode_ci,
+  `is_urgent` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `settings_key_unique` (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table al_konveksi.stok
+CREATE TABLE IF NOT EXISTS `stok` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '7c2405c8-ea0a-4cad-8df2-313751f0b16c',
+  `produk_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stok` int NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `stok_produk_id_foreign` (`produk_id`),
+  CONSTRAINT `stok_produk_id_foreign` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table al_konveksi.suppliers
+CREATE TABLE IF NOT EXISTS `suppliers` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '5744fc48-d056-463b-82e7-81bda75ebbce',
+  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keterangan` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table al_konveksi.ulasan
+CREATE TABLE IF NOT EXISTS `ulasan` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'f888b397-ac11-42ee-b10a-f2ea6ba4321b',
+  `pesanan_id` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `produk_id` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` bigint unsigned NOT NULL,
+  `pesanan_khusus_id` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rating` int NOT NULL,
+  `keterangan` text COLLATE utf8mb4_unicode_ci,
+  `cek_pesanan_khusus` tinyint(1) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ulasan_pesanan_id_foreign` (`pesanan_id`),
+  KEY `ulasan_produk_id_foreign` (`produk_id`),
+  KEY `ulasan_user_id_foreign` (`user_id`),
+  CONSTRAINT `ulasan_pesanan_id_foreign` FOREIGN KEY (`pesanan_id`) REFERENCES `pesanan` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `ulasan_produk_id_foreign` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `ulasan_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table al_konveksi.users
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `image` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` bigint DEFAULT NULL,
+  `position` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`),
+  UNIQUE KEY `users_phone_unique` (`phone`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Data exporting was unselected.
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
