@@ -96,12 +96,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
             @php
                 $produks = json_decode($data->produk);
                 $totalPrice = 0;
             @endphp
             @foreach ($produks as $item)
+            <tr>
                 @php
                     $produk = \App\Models\Product::find($item->id);
                     $subtotal = $produk ? $produk->harga * $item->qty : 0;
@@ -124,8 +124,8 @@
                       </div>
                   </td>
                 @endif
-            @endforeach            
             </tr>
+            @endforeach            
         </tbody>
         <tfoot>
             <tr class="py-2 d-flex justify-content-between">
