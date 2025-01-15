@@ -84,8 +84,17 @@ class OrderController extends Controller
         $cart = session()->get('cart', []);
         foreach ($cart as $key => $value) {
             $product = Product::find($key);
-            if (!$product || $product->stok < $value['qty']) {
-                return redirect()->back()->withInput()->with('error', 'Stok produk '. $product->nama.' tersisa '. $product->stok.'unit. Silahkan update jumlah barang yang ingin dibeli.');
+
+            if (!$product) {
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', 'Produk dengan ID ' . $key . ' tidak ditemukan.');
+            }
+
+            if ($product->stok < $value['qty']) {
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', 'Stok produk ' . $product->nama . ' tersisa ' . $product->stock->stok . ' unit. Silahkan update jumlah barang yang ingin dibeli.');
             }
         }
         $totalHarga = $this->calcTotalCartPrice($cart);
