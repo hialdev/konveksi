@@ -257,7 +257,7 @@ class OrderController extends Controller
     public function destroy($id){
         try {
             $order = Order::find($id);
-            if($order->status != '3'){
+            if($order->status != '3' && $order->status != '0'){
                 return redirect()->back()->withInput()->with('error', 'Gagal menghapus pesanan, Hanya pesanan yang Reject / Invalid yang bisa dihapus');
             }
             $order->delete();
