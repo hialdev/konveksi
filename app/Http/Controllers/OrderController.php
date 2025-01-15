@@ -156,6 +156,23 @@ class OrderController extends Controller
         ]);
         
         try {
+            $products = json_decode($order->produk);
+            foreach ($products as $key => $value) {
+                $product = Product::find($key);
+
+                if (!$product) {
+                    return redirect()->back()
+                        ->withInput()
+                        ->with('error', 'Produk dengan ID ' . $key . ' tidak ditemukan.');
+                }
+
+                if ($product->stock->stok < $value['qty']) {
+                    return redirect()->back()
+                        ->withInput()
+                        ->with('error', 'Stok produk ' . $product->nama . ' tersisa ' . $product->stock->stok . ' unit. Silahkan update jumlah barang yang ingin dibeli.');
+                }
+            }
+            
             if($order->status != '0' && $order->status != '1' && !$this->checkExpired($order)){
                 return redirect()->back()->withInput()->with('error', 'Gagal upload pembayaran pesanan, Status tidak valid');
             }
