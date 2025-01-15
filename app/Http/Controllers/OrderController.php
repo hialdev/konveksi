@@ -91,7 +91,7 @@ class OrderController extends Controller
                     ->with('error', 'Produk dengan ID ' . $key . ' tidak ditemukan.');
             }
 
-            if ($product->stok < $value['qty']) {
+            if ($product->stock->stok < $value['qty']) {
                 return redirect()->back()
                     ->withInput()
                     ->with('error', 'Stok produk ' . $product->nama . ' tersisa ' . $product->stock->stok . ' unit. Silahkan update jumlah barang yang ingin dibeli.');
