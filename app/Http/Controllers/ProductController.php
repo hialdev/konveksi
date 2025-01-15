@@ -269,14 +269,10 @@ class ProductController extends Controller
         $product = Product::find($request->get('product_id'));
 
         if (isset($cart[$request->get('product_id')])) {
-            if($cart[$request->get('product_id')]['qty'] <= $product->stock->stok){
-                $cart[$request->get('product_id')]['qty'] = $request->get('qty');
-            }else{
-                return response()->json([
-                   'success' => false,
-                   'message' => 'Stok produk ini hanya tersedia sebanyak '. $product->stock->stok.' item'
-                ]);
+            if($cart[$request->get('product_id')]['qty'] > $product->stock->stok){
+                return redirect()->back()->with('error', 'Permintaan Kuantiti, Melebihi stock yang ada');
             }
+            $cart[$request->get('product_id')]['qty'] = $request->get('qty');
         }
 
         session()->put('cart', $cart);
