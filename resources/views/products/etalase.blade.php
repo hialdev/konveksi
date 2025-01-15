@@ -71,10 +71,8 @@
                                         {{ formatRupiah($product->harga) }}</div>
                                     <a href="{{ route('product.show', $product->slug) }}"
                                         class="text-decoration-none text-dark fs-4">{{ $product->nama }}</a>
-                                    <p class="fs-2 line-clamp line-clamp-2">{{ $product->keterangan }}</p>
+                                    <p class="fs-2 line-clamp line-clamp-2 text-danger">Sisa {{ $product->stock->stok }} stok</p>
                                     <div class="d-flex align-items-center gap-2 mb-3">
-                                        <a href="{{ route('product.show', $product->slug) }}"
-                                            class="btn btn-sm btn-light"><i class="ti ti-eye"></i></a>
                                         <button type="submit"
                                             class="{{ isset($carts[$product->id]) ? '' : 'd-none' }} fs-3 px-3 w-100 text-center justify-content-center btn-sm btn btn-primary rounded-2 d-flex align-items-center gap-2"
                                             disabled>
@@ -138,6 +136,7 @@
                                     <div>
                                         <div class="fs-3 fw-semibold line-clamp line-clamp-2">{{ $cart->nama }}</div>
                                         <div class="fs-2 line-clamp line-clamp-2">{{ formatRupiah($cart->harga) }}</div>
+                                        <p class="fs-2 line-clamp line-clamp-2 text-danger">Sisa {{ $cart->stock->stok }} stok</p>
                                         <div class="d-flex mt-2 align-items-center gap-2">
                                             <input type="hidden" name="product_id" id="product_id_{{ $item['id'] }}" value="{{ $item['id'] }}">
                                             <button type="button" class="btn btn-sm btn-danger" onclick="updateQuantity('decrement', '{{ $item['id'] }}')">

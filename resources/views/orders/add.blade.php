@@ -50,6 +50,7 @@
                       <div>
                           <div class="fs-3 fw-semibold line-clamp line-clamp-2">{{ $cart->nama }}</div>
                           <div class="fs-2 line-clamp line-clamp-2">{{ formatRupiah($cart->harga) }}</div>
+                          <p class="fs-2 line-clamp line-clamp-2 text-danger">Sisa {{ $cart->stock->stok }} stok</p>
                           <div class="d-flex mt-2 align-items-center gap-2">
                               <input type="hidden" name="product_id" id="product_id_{{ $item['id'] }}" value="{{ $item['id'] }}">
                               <button type="button" class="btn btn-sm btn-danger" onclick="updateQuantity('decrement', '{{ $item['id'] }}')">
