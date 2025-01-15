@@ -12,6 +12,7 @@ use App\Http\Controllers\CustomOrderPaymentController;
 use App\Http\Controllers\DesainController;
 use App\Http\Controllers\FlyerController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -92,6 +93,9 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/order/{id}/review',[OrderController::class, 'review'])->name('order.review');
     Route::post('/order/{id}/retur',[OrderController::class, 'retur'])->name('order.retur');
     
+    Route::get('/pdf/preview/{bladePath}/{type}/{id}', [PDFController::class, 'preview'])->where('bladePath', '.*');
+    Route::get('/pdf/download/{bladePath}/{type}/{id}', [PDFController::class, 'download'])->where('bladePath', '.*');
+
     Route::get('/product',[ProductController::class, 'index'])->name('product.index');
     Route::get('/raw-material',[RawMaterialController::class, 'index'])->name('raw_material.index');
     Route::get('/supplier',[SupplierController::class, 'index'])->name('supplier.index');

@@ -115,11 +115,6 @@
                                             style="max-width: 15rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                             <i class="ti ti-clock fs-4"></i> {{\Carbon\Carbon::parse($corder->deadline)->format('d M Y')}}
                                         </div>
-                                        <a href="{{$corder->lampiran ? '/storage/'.$corder->lampiran : '#'}}"  target="_blank"
-                                            class="mb-1 mt-2 fw-semibold badge {{$corder->lampiran ? 'bg-primary-subtle text-primary' : 'bg-danger-subtle text-danger'}} p-1 px-2 fs-2 gap-1 d-inline-flex align-items-center text-truncate" 
-                                            style="max-width: 15rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                            <i class="ti ti-file fs-4"></i> {{$corder->lampiran ?? 'Tidak ada lampiran'}}
-                                        </a>
                                     </div>
                                 </td>
                                 <td>

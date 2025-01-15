@@ -13,7 +13,7 @@
                 <form action="{{ route('desain.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-2">
-                        <label class="form-label fw-semibold">Lampirkan Foto / File Bahan Baku Anda</label>
+                        <label class="form-label fw-semibold">Lampirkan Konsep / Desain Anda</label>
                         <div class="input-group">
                             <span class="input-group-text px-6" id="basic-addon1"><i
                                     class="ti ti-file fs-6"></i></span>
