@@ -110,8 +110,8 @@
                         </div>
                         <div class="mb-4">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" name="is_available" type="checkbox" value="1" id="is_available-{{$raw_material->id}}" checked />
-                                <label class="form-check-label" for="is_available-{{$raw_material->id}}">Jadikan status Bahan Baku (Bahan Baku) ini tersedia</label>
+                                <input class="form-check-input" name="is_available" type="checkbox" value="1" id="is_available" checked />
+                                <label class="form-check-label" for="is_available">Jadikan status Bahan Baku (Bahan Baku) ini tersedia</label>
                             </div>
                         </div>
                         <div class="mb-4">
