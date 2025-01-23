@@ -93,6 +93,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/order/{id}/review',[OrderController::class, 'review'])->name('order.review');
     Route::post('/order/{id}/retur',[OrderController::class, 'retur'])->name('order.retur');
     
+    Route::get('/pdf/stream/{bladePath}', [PDFController::class, 'previewPdf'])->where('bladePath', '.*')->name('pdf.preview.blade');
     Route::get('/pdf/preview/{bladePath}/{type}/{id}', [PDFController::class, 'preview'])->where('bladePath', '.*')->name('pdf.preview');
     Route::get('/pdf/download/{bladePath}/{type}/{id}', [PDFController::class, 'download'])->where('bladePath', '.*')->name('pdf.download');
 

@@ -31,6 +31,7 @@
             class="bg-primary text-white d-flex align-items-center justify-content-center rounded-5 me-auto">
             {{ count($prequests) }}</div>
         <a href="{{ route('request_production.add') }}" class="btn btn-primary btn-al-primary">Buat Pengajuan</a>
+        <a href="{{route('pdf.preview.blade', ['bladePath' => 'request_productions.report'])}}" target="_blank" class="btn btn-danger"><i class="ti ti-file-download me-2"></i>Laporan Produksi</a>
     </div>
 
     <div class="card">

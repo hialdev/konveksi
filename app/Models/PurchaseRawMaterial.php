@@ -55,4 +55,9 @@ class PurchaseRawMaterial extends Model
     {
         return $this->belongsTo(RawMaterial::class, 'bahan_baku_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

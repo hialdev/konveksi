@@ -59,6 +59,9 @@
                     <div class="{{$custom->remaining_payment != 0 && $custom->remaining_payment < $custom->total_harga ? '' : 'd-none'}} border p-1 px-2 border-warning text-warning rounded-3 fw-semibold fs-2">Proses Pembayaran</div>
                     <div class="{{$custom->remaining_payment == 0 ? '' : 'd-none'}} border p-1 px-2 border-success text-success rounded-3 fw-semibold fs-2">Lunas</div>
                 </div>
+                <a href="{{route('pdf.preview', ['bladePath' => 'custom_orders.invoice' ,'type' => 'custom','id'=>$custom->id])}}" target="_blank" class="btn btn-danger d-flex align-items-center gap-2 rounded-pill">
+                    <i class="fs-4 ti ti-file-invoice"></i>Report   
+                </a>
             </div>
         </div>
         <div class="row accordion-content mt-3">
@@ -158,7 +161,7 @@
               </div>
               <hr>
               <div class="d-flex align-items-center gap-3">
-                  @if($custom->status == '4')
+                  @if($custom->status > '4')
                       <div class="mb-2">
                           <div class="fs-1">Total Harga</div>
                           <div class="fs-3 fw-bold text-primary">{{formatRupiah($custom->total_harga)}}</div>
@@ -234,7 +237,9 @@
         <button type="button" class="btn btn-primary-subtle btn-al-primary text-white" data-bs-toggle="modal" data-bs-target="#bankModal">
           List Rekening
         </button>
-
+        <a href="{{route('pdf.preview', ['bladePath' => 'custom_orders.payment.kwitansi' ,'type' => 'custom','id'=>$custom->id])}}" target="_blank" class="btn btn-danger d-flex align-items-center gap-2 rounded-pill">
+            <i class="fs-4 ti ti-file-invoice"></i>Kwitansi Pembayaran   
+        </a>
         <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
@@ -264,7 +269,7 @@
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="bankModalLabel">List Rekening</h5>
+                <h5 class="modal-title" id="bankModalLabel">List Rekening untuk Pembayaran</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body pt-0" style="white-space:normal !important">

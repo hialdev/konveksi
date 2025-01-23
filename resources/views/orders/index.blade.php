@@ -31,6 +31,7 @@
             class="bg-primary text-white d-flex align-items-center justify-content-center rounded-5 me-auto">
             {{ count($orders) }}</div>
         <a href="{{ route('product.etalase') }}" class="btn btn-primary btn-al-primary">Buat Baru</a>
+        <a href="{{route('pdf.preview.blade', ['bladePath' => 'orders.report'])}}" target="_blank" class="btn btn-danger"><i class="ti ti-file-download me-2"></i>Laporan</a>
     </div>
 
     <div class="card">
@@ -107,7 +108,7 @@
                                         <a href="/storage/{{$order->bukti_pembayaran}}"  target="_blank"
                                             class="mb-1 mt-2 fw-semibold badge bg-primary-subtle text-primary p-1 px-2 fs-2 gap-1 d-inline-flex align-items-center text-truncate" 
                                             style="max-width: 15rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                            <i class="ti ti-file fs-4"></i> {{$order->bukti_pembayaran}}
+                                            <i class="ti ti-file fs-4"></i> Bukti Pembayaran
                                         </a>
                                         @else
                                         <a href="{{route('order.payment', $order->id)}}" 

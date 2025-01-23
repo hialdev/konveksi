@@ -31,6 +31,7 @@
             class="bg-primary text-white d-flex align-items-center justify-content-center rounded-5 me-auto">
             {{ count($purchases) }}</div>
         <a href="{{ route('raw_material.purchase.add') }}" class="btn btn-primary btn-al-primary">Tambah</a>
+        <a href="{{route('pdf.preview.blade', ['bladePath' => 'raw_materials.purchase.report'])}}" target="_blank" class="btn btn-danger"><i class="ti ti-file-download me-2"></i>Laporan Pembelian</a>
     </div>
 
     <div class="card">

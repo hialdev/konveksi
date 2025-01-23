@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class PDFController extends Controller
 {
+    public function previewPdf($bladePath)
+    {
+        $pdf = Pdf::loadView($bladePath);
+        return $pdf->stream();
+    }
+
     public function preview($bladePath, $type, $id)
     {
         if (!view()->exists($bladePath)) {
@@ -38,16 +44,21 @@ class PDFController extends Controller
         return $pdf->download($fileName);
     }
 
-    protected function getDataByType($type, $id)
+    protected function getDataByType($type = '', $id = null)
     {
-        switch ($type) {
-            case 'order':
-                return Order::find($id);
-            case 'custom':
-                return CustomOrder::find($id);
-            default:
-                return null; // Jika tipe tidak valid
+        if($type != '' && $id){
+            switch ($type) {
+                case 'order':
+                    return Order::find($id);
+                case 'custom':
+                    return CustomOrder::find($id);
+                default:
+                    $model = resolve("App\\Models\\$type")::find($id);
+                    return $model; // Jika tipe tidak valid
+            }
         }
+
+        return true;
     }
 
 }
