@@ -28,6 +28,7 @@ return new class extends Migration
             $table->text('keterangan_bahan')->nullable(); // Penjelasan Bahan Baku
             
             $table->date('deadline');
+            $table->text('keterangan')->nullable(); // Description
             $table->integer('qty')->default(0);
             $table->bigInteger('total_harga')->nullable();
             $table->enum('status', [0, 1, 2, 3, 4, 5, 6])->default(0); //0 : Waiting Price, 1: Harga ditetapkan, 2: Nego, 3: Reject, 4: Approve, 5: Selesai, 6: Pengembalian

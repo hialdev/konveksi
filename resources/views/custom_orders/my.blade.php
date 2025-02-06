@@ -417,9 +417,12 @@
                                             </div>
                                             <div class="">
                                                 <div class="fs-4 fw-bold text-primary mb-2">{{formatRupiah($corder->total_harga)}}</div>
-                                                <button class="btn btn-sm btn-secondary"
-                                                    data-bs-toggle="modal" data-bs-target="#negoModal-{{$corder->id}}"
-                                                >Lihat Penetapan Harga</button>
+                                                <div class="position-relative">
+                                                    <button class="btn btn-sm btn-secondary"
+                                                        data-bs-toggle="modal" data-bs-target="#negoModal-{{$corder->id}}"
+                                                    >Lihat Penetapan Harga</button>
+                                                    <div class="position-absolute rounded-circle bg-warning shadow" style="width: 10px; height:10px; top: -0.2em; right: -0.2em;"></div>
+                                                </div>
                                             
                                                 <!-- Detail Nego Harga Modal -->
                                                 <div class="modal fade" id="negoModal-{{$corder->id}}" tabindex="-1"

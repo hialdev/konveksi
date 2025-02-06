@@ -89,6 +89,7 @@ class CustomOrderController extends Controller
             'raw_attachment' => 'nullable|file|mimes:webp,png,jpeg,jpg,pdf,doc,ppt,pptx,jfif',
 
             // Default
+            'keterangan' => 'nullable|string',
             'qty' => 'required|numeric',
             'deadline' => 'required|date',
             'customer_id' => 'nullable|string|exists:users,id',
@@ -120,6 +121,7 @@ class CustomOrderController extends Controller
             $custom->produk_id = $request->get('product_id') ?? null;
             $custom->desain_id = $request->get('desain_id') ?? null;
             $custom->qty = $request->get('qty');
+            $custom->keterangan = $request->get('keterangan');
             $custom->deadline = $request->get('deadline');
             $custom->save();
             return redirect()->route($route)->with('success', 'Pesanan Khusus dibuat dengan kode '.$custom->code.'.');
@@ -153,6 +155,7 @@ class CustomOrderController extends Controller
 
             // Default
             'qty' => 'required|numeric',
+            'keterangan' => 'nullable|string',
             'deadline' => 'required|date',
             'customer_id' => 'nullable|string|exists:users,id',
         ]);
@@ -197,6 +200,7 @@ class CustomOrderController extends Controller
             $custom->produk_id = $request->get('product_id') ?? null;
             $custom->desain_id = $request->get('desain_id') ?? null;
             $custom->qty = $request->get('qty');
+            $custom->keterangan = $request->get('keterangan');
             $custom->deadline = $request->get('deadline');
             $custom->save();
 

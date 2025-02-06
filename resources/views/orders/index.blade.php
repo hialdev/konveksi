@@ -31,7 +31,49 @@
             class="bg-primary text-white d-flex align-items-center justify-content-center rounded-5 me-auto">
             {{ count($orders) }}</div>
         <a href="{{ route('product.etalase') }}" class="btn btn-primary btn-al-primary">Buat Baru</a>
-        <a href="{{route('pdf.preview.blade', ['bladePath' => 'orders.report'])}}" target="_blank" class="btn btn-danger"><i class="ti ti-file-download me-2"></i>Laporan</a>
+        <button data-bs-toggle="modal" data-bs-target="#reportModal" href="" class="btn btn-danger"><i class="ti ti-file-download me-2"></i>Laporan</button>
+
+        <!-- Report Modal -->
+        <div class="modal fade" id="reportModal" tabindex="-1"
+            aria-labelledby="vertical-center-modal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header d-flex align-items-center">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            Generate Laporan
+                        </h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{route('pdf.preview.blade', ['bladePath' => 'orders.report'])}}" target="_blank" method="GET">
+                            <div class="mb-2">
+                                <label for="start" class="form-label">Mulai dari Tanggal</label>
+                                <input type="date" name="start" class="d-block form-control" value="">
+                            </div>
+
+                            <div class="mb-2">
+                                <label for="start" class="form-label">Hingga Tanggal</label>
+                                <input type="date" name="end" class="d-block form-control" value="">
+                            </div>
+
+                            <div class="alert alert-warning">
+                                Kosongkan semuanya untuk menampilkan semua data yang ada
+                            </div>
+                            <div class="d-flex gap-1 align-items-center justify-content-end">
+                                <button type="button"
+                                    class="btn bg-danger-subtle text-danger  waves-effect text-start"
+                                    data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="submit"
+                                    class="btn btn-danger">Generate Laporan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="card">

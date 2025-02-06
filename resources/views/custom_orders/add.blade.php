@@ -231,7 +231,20 @@
                                 </span>
                             @enderror
                         </div>
-
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Tambahkan keterangan untuk pesanan khusus</label>
+                            <div class="input-group">
+                                <span class="input-group-text px-6" id="basic-addon1"><i
+                                        class="ti ti-align-justified fs-6"></i></span>
+                                <textarea class="form-control bg-white ps-2" name="keterangan" id="keterangan" cols="20" rows="5"
+                                    placeholder="Tambahkan keterangan untuk pesanan khusus">{{old('keterangan')}}</textarea>
+                            </div>
+                            @error('keterangan')
+                                <span class="invalid-feedback" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
                         @role(['admin', 'developer', 'employee'])
                         <div class="my-3">
                             <label class="form-label fw-semibold">Kaitkan Pesanan ke Pelanggan</label>

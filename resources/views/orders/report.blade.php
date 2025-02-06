@@ -14,13 +14,25 @@
         .d-none {display: none}
     </style>
 </head>
+@php
+    $start = request()->start;
+    $end = request()->end;
+
+    $query = \App\Models\Order::orderBy('code', 'ASC');
+    if ($start && $end) {
+        $query->whereBetween('created_at', [$start, $end]);
+    }
+    $orders = $query->get();
+@endphp
 <body>
     <h2>Laporan Pesanan Barang</h2>
+    @if($start && $end)<h3 class="text-center" style="text-align: center;">{{\Carbon\Carbon::parse($start)->format('d F Y')}} s.d {{\Carbon\Carbon::parse($end)->format('d F Y')}}</h3>@endif
     <h4 class="text-muted">Dicetak pada : {{\Carbon\Carbon::parse(now())->format('d M Y, H:i:s')}}</h4>
     <table>
         <thead>
             <tr>
-                <th>#</th>
+                <th>Tgl Pembelian</th>
+                <th>Kode</th>
                 <th>Produk</th>
                 <th>Total Harga (+PPN)</th>
                 <th>Pembeli</th>
@@ -28,11 +40,11 @@
             </tr>
         </thead>
         <tbody>
-            @php
-                $orders = \App\Models\Order::orderBy('code', 'ASC')->get();
-            @endphp
-            @foreach ($orders as $order)
+            @forelse ($orders as $order)
                 <tr>
+                    <td>
+                        {{\Carbon\Carbon::parse($order->created_at)->format('d M Y, H:i:s')}}
+                    </td>
                     <td>
                         <strong>{{ $order->code }}</strong><br/>
                         <a href="/storage/{{$order->bukti_pembayaran}}"  target="_blank"
@@ -83,7 +95,11 @@
                         @endswitch
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="6">Tidak ada data yang dapat ditampilkan</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </body>
